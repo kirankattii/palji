@@ -118,9 +118,9 @@ function Checkout() {
 		if (!selectedShippingAddress) {
 			toast.error("Please select a shipping address")
 		}
-		else if (!selectedBillingAddress) {
-			toast.error("Please select a billing address")
-		}
+		// else if (!selectedBillingAddress) {
+		// 	toast.error("Please select a billing address")
+		// }
 		else {
 			setCurrentPage("PAYMENT")
 		}
@@ -296,7 +296,7 @@ function Checkout() {
 												))}
 										</div>
 									</div>
-									<div>
+									{/* <div>
 										<div className="shipping-address-title">
 											<h2>Billing Address</h2>
 											<button onClick={() => navigate("/add-billing-address")}>
@@ -331,7 +331,7 @@ function Checkout() {
 													</div>
 												))}
 										</div>
-									</div>
+									</div> */}
 								</div>
 								{/* Proceed to Payment */}
 								<div onClick={(e) => manageCurrentPage(e)}>

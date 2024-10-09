@@ -310,7 +310,7 @@ function ProductDetails() {
 
             {/* product nutritions */}
             {
-              productNuturitions && productNuturitions.length > 0 && (
+              productNuturitions && productNuturitions.length > 1 && (
                 <div className={styles.nutritionContainer}>
                   <h2 className={styles.title2}>Nutritional Facts</h2>
                   <div className={styles.nutritionGrid}>
