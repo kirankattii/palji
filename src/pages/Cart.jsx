@@ -113,7 +113,15 @@ const Cart = () => {
                       <img src={item?.productId?.thumbnail} alt="" />
                       <p className="productItemName1">{item.productId?.name}  </p>
                     </div>
-                    <p className="productItemName2">{item.productId?.name} <br /> {`${item.size.size} ${item.size.sizetype}`}</p>
+                    {/* <p className="productItemName2">{item.productId?.name} <br /> {`${item.size.size} ${item.size.sizetype}`}</p> */}
+                    <p className="productItemName2">
+                      {item.productId?.name}
+                      <br />
+                      {item.size.size !== "null" && item.size.sizetype !== "null" ? (
+                        `${item.size.size} ${item.size.sizetype}`
+                      ) : null}
+                    </p>
+
                     {/* <p>₹{item.productId?.PriceAfterDiscount}</p> */}
                     <small>{` ₹${item.size.FinalPrice} x ${item.quantity} `}</small>
 

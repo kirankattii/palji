@@ -312,7 +312,9 @@ function ProductDetails() {
             {
               productNuturitions && productNuturitions.length > 1 && (
                 <div className={styles.nutritionContainer}>
-                  <h2 className={styles.title2}>Nutritional Facts</h2>
+                  <h2 className={styles.title2}>NUTRITIONAL INFORMATION Per 100g <br />
+                    <span>Approximate Composition</span></h2>
+                  <hr />
                   <div className={styles.nutritionGrid}>
                     <div className={styles.header}>
                       <span>Nutritional Facts</span>
