@@ -16,33 +16,28 @@ let cartCountListeners = []
 // 		console.log(error)
 // 	}
 // }
-export const fetchCart = async (setCartItems,setCompleteCart,setFetchCartLoader ) => {
+export const fetchCart = async (setCartItems, setCompleteCart, setFetchCartLoader) => {
 	setFetchCartLoader(true);
 	try {
-	  const response = await makeApi("/api/my-cart", "GET");
-  
-	  
-	  // set cart id in cookie
-	//   Cookies.set("cartId", response.data._id , { expires: 2 });
-	//   Cookies.set("cardItem" ,JSON.stringify(response.data), { expires: 2 });
-	
-	  const cartItems = response.data.orderItems.map(item => ({
-		  productId: item.productId._id,
-		  quantity: item.quantity,
-		  size: item.size._id,
+		const response = await makeApi("/api/my-cart", "GET");
+		const cartItems = response.data.orderItems.map(item => ({
+			productId: item.productId._id,
+			quantity: item.quantity,
+			size: item.size._id,
 		}));
-		console.log("000",cartItems);
+		console.log("000", cartItems);
 		setCartItems(cartItems);
-		if(setCompleteCart){
-		  setCompleteCart(response.data);
+		if (setCompleteCart) {
+			setCompleteCart(response.data);
 		}
-	  updateCartCount(cartItems);
+		updateCartCount(cartItems);
 	} catch (error) {
-	  console.log(error);
-	}finally {
-	  setFetchCartLoader(false);  
+		console.log(error);
+	} finally {
+		// fetchCart(setCartItems);
+		setFetchCartLoader(false);
 	}
-  };
+};
 
 export const fetchWishlist = async (setWishlistItems) => {
 	try {
@@ -103,42 +98,42 @@ export const addToCart = async (
 	setCartItems,
 	setProductLoaders,
 	selectProductSize
-  ) => {
+) => {
 	const token = localStorage.getItem("token");
 	if (!token) {
-	  setIsLogin(false);
-	  setShowPopup(true);
-	  return;
+		setIsLogin(false);
+		setShowPopup(true);
+		return;
 	}
 	try {
-	  setProductLoaders((prevState) => ({
-		...prevState,
-		[productId]: true,
-	  }));
-  
-	  const method = "POST";
-	  const endpoint = "/api/add-to-cart";
-	  await makeApi(endpoint, method, {
-		productId,
-		selectProductSize,
-		quantity: 1,
-		shippingPrice: 0,
-	  });
-  
-	  fetchCart(setCartItems);
-	  const updatedCartItems = Cookies.get("cartItems") ? JSON.parse(Cookies.get("cartItems")) : [];
-	  const newCartItem = { productId, quantity: 1, size: selectProductSize };
-	  updatedCartItems.push(newCartItem);
-	  Cookies.set("cartItems", JSON.stringify(updatedCartItems), { expires: 2 });
+		setProductLoaders((prevState) => ({
+			...prevState,
+			[productId]: true,
+		}));
+
+		const method = "POST";
+		const endpoint = "/api/add-to-cart";
+		await makeApi(endpoint, method, {
+			productId,
+			selectProductSize,
+			quantity: 1,
+			shippingPrice: 0,
+		});
+
+		fetchCart(setCartItems);
+		const updatedCartItems = Cookies.get("cartItems") ? JSON.parse(Cookies.get("cartItems")) : [];
+		const newCartItem = { productId, quantity: 1, size: selectProductSize };
+		updatedCartItems.push(newCartItem);
+		Cookies.set("cartItems", JSON.stringify(updatedCartItems), { expires: 2 });
 	} catch (error) {
-	  console.log(error.response.data);
+		console.log(error.response.data);
 	} finally {
-	  setProductLoaders((prevState) => ({
-		...prevState,
-		[productId]: false,
-	  }));
+		setProductLoaders((prevState) => ({
+			...prevState,
+			[productId]: false,
+		}));
 	}
-  };
+};
 
 
 // export const removeFromCart = async (
@@ -156,7 +151,7 @@ export const addToCart = async (
 // 	  const method = "POST";
 // 	  const endpoint = "/api/remove-from-cart";
 // 	  await makeApi(endpoint, method, { productId , selectProductSize });
-  
+
 // 	  // fetchCart(setCartItems);
 // 	  let updatedCartItems = Cookies.get("cartItems") ? JSON.parse(Cookies.get("cartItems")) : [];
 // 	  updatedCartItems = updatedCartItems.filter(item => item.productId !== productId);
@@ -176,41 +171,41 @@ export const removeFromCart = async (
 	setCartItems,
 	fetchCart,
 	selectProductSize
-  ) => {
+) => {
 	try {
-	  setProductLoaders((prevState) => ({
-		...prevState,
-		[productId]: true,
-	  }));
-  
-	  const method = "POST";
-	  const endpoint = "/api/remove-from-cart";
-	  await makeApi(endpoint, method, { productId, selectProductSize });
-  
-	  // Immediately update the cartItems state after removing the item
-	  setCartItems((prevItems) => {
-		const existingItem = prevItems.find(item => item.productId === productId && item.size === selectProductSize);
-		if (existingItem && existingItem.quantity > 1) {
-		  return prevItems.map(item => 
-			item.productId === productId && item.size === selectProductSize
-			  ? { ...item, quantity: item.quantity - 1 }
-			  : item
-		  );
-		} else {
-		  return prevItems.filter(item => !(item.productId === productId && item.size === selectProductSize));
-		}
-	  });
-  
+		setProductLoaders((prevState) => ({
+			...prevState,
+			[productId]: true,
+		}));
+
+		const method = "POST";
+		const endpoint = "/api/remove-from-cart";
+		await makeApi(endpoint, method, { productId, selectProductSize });
+
+		// Immediately update the cartItems state after removing the item
+		setCartItems((prevItems) => {
+			const existingItem = prevItems.find(item => item.productId === productId && item.size === selectProductSize);
+			if (existingItem && existingItem.quantity > 1) {
+				return prevItems.map(item =>
+					item.productId === productId && item.size === selectProductSize
+						? { ...item, quantity: item.quantity - 1 }
+						: item
+				);
+			} else {
+				return prevItems.filter(item => !(item.productId === productId && item.size === selectProductSize));
+			}
+		});
+
 	} catch (error) {
-	  console.log(error);
+		console.log(error);
 	} finally {
-	  setProductLoaders((prevState) => ({
-		...prevState,
-		[productId]: false,
-	  }));
-	  fetchCart(setCartItems);
+		setProductLoaders((prevState) => ({
+			...prevState,
+			[productId]: false,
+		}));
+		fetchCart(setCartItems);
 	}
-  };
+};
 export const submitOrder = async (
 	data,
 	setLoading,
@@ -347,30 +342,32 @@ export const deleteproductFromCart = async (
 	fetchCart,
 	selectProductSize,
 	quantity
-  ) => {
+) => {
 	try {
-	  setProductLoaders((prevState) => ({
-		...prevState,
-		[productId]: true, 
-	  }));
-	  const method = "POST";
-	  const endpoint = "/api/delete-product-from-cart";
-	  await makeApi(endpoint, method, { productId , selectProductSize,productQuantity: quantity });
-  
-	  // fetchCart(setCartItems);
-	  let updatedCartItems = Cookies.get("cartItems") ? JSON.parse(Cookies.get("cartItems")) : [];
-	  updatedCartItems = updatedCartItems.filter(item => item.productId !== productId);
-	  Cookies.set("cartItems", JSON.stringify(updatedCartItems), { expires: 2 });
+		setProductLoaders((prevState) => ({
+			...prevState,
+			[productId]: true,
+		}));
+		const method = "POST";
+		const endpoint = "/api/delete-product-from-cart";
+		await makeApi(endpoint, method, { productId, selectProductSize, productQuantity: quantity });
+
+		fetchCart(setCartItems);
+		let updatedCartItems = Cookies.get("cartItems") ? JSON.parse(Cookies.get("cartItems")) : [];
+		updatedCartItems = updatedCartItems.filter(item => item.productId !== productId);
+		Cookies.set("cartItems", JSON.stringify(updatedCartItems), { expires: 2 });
 	} catch (error) {
-	  console.log(error);
+		console.log(error);
 	} finally {
-	  setProductLoaders((prevState) => ({
-		...prevState,
-		[productId]: false,
-	  }));
+		fetchCart(setCartItems);
+
+		setProductLoaders((prevState) => ({
+			...prevState,
+			[productId]: false,
+		}));
 	}
-  };
-  
+};
+
 
 export const updateCartCount = (cartItems) => {
 	const cartCount = cartItems.reduce((count, item) => count + item.quantity, 0)
@@ -409,4 +406,3 @@ export const removeAllProductsFromCart = async (
 		}))
 	}
 }
- 

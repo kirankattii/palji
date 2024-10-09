@@ -298,7 +298,7 @@ const OrderSummary = () => {
 								</div>
 							</td>
 							<td>{item.quantity}</td>
-							<td>{item.productId.PriceAfterDiscount}</td>
+							<td>{item.singleProductPrice}</td>
 							<td>₹{item.totalPrice} </td>
 						</tr>
 					))}
@@ -308,15 +308,17 @@ const OrderSummary = () => {
 				<div className={styles.totalSection}>
 					<div className={styles.totalRow}>
 						<span><strong>Subtotal:</strong></span>
-						<span>₹ {orderSummary.CartId.TotalProductPrice} </span>
+						<span>₹ {orderSummary.CartId.totalPrice} </span>
 					</div>
 					<div className={styles.totalRow}>
 						<span><strong>Shipping Price:</strong></span>
-						<span>₹ {orderSummary.CartId.shippingPrice} </span>
+						{/* <span>₹ {orderSummary.CartId.shippingPrice}  </span> */}
+						<span>Free </span>
+
 					</div>
 					<div className={styles.totalRow}>
 						<span><strong>Total:</strong></span>
-						<span>₹ {orderSummary.CartId.TotalProductPrice} </span>
+						<span>₹ {orderSummary.CartId.totalPrice} </span>
 					</div>
 				</div>
 			</div>

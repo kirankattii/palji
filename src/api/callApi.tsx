@@ -23,7 +23,6 @@ export const makeApi = async (
 			// url: `http://localhost:7000${endpoint}`,
 			url: `https://new-palji-backend-1.onrender.com${endpoint}`,
 			// url: `https://sk-backend-uvv5.onrender.com${endpoint}`,
-
 			headers,
 			data,
 		}
@@ -31,10 +30,6 @@ export const makeApi = async (
 		const response = await axios(config)
 		return response
 	} catch (error: any) {
-		// if(error.response.data.error === "Unauthorized access"){
-		// 	console.log("------------------------------")
-		// 	window.location.href = "/Signup";
-		// }
 		console.error("API request failed:", error.response.data)
 		throw error
 	}

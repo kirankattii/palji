@@ -23,7 +23,6 @@ function Checkout() {
 	const [selectPaymentMethod, setSelectPaymentMethod] = useState(null)
 	const [loading, setLoading] = useState(false)
 	const [cartItem, setCartItem] = useState([])
-	console.log("-=-=-=-=", cartItem)
 	const [selectedShippingAddress, setSelectedShippingAddress] = useState(null)
 	const [selectedBillingAddress, setSelectedBillingAddress] = useState(null)
 	const [currentPage, setCurrentPage] = useState("CHECKOUT")
@@ -81,15 +80,11 @@ function Checkout() {
 	}
 
 	const handleShippingAddressSelect = (address) => {
-		console.log("Selected shipping address:", address)
 		setSelectedShippingAddress(address)
-		console.log("Updated selected shipping address:", selectedShippingAddress)
 	}
 
 	const handleBillingAddressSelect = (address) => {
-		console.log("Selected billing address:", address)
 		setSelectedBillingAddress(address)
-		console.log("Updated selected billing address:", selectedBillingAddress)
 	}
 
 	const handlePaymentMethodSelect = (payment) => {
@@ -103,7 +98,9 @@ function Checkout() {
 		}
 		event.preventDefault()
 		if (selectPaymentMethod === "Razorpay") {
-			createRazorpayOrder(1000);
+			console.log(cartItem);
+			createRazorpayOrder(cartItem.totalPrice);
+
 		} else {
 			setIsSubmitDisabled(true)
 			const data = {
@@ -153,18 +150,19 @@ function Checkout() {
 		});
 	};
 	const createRazorpayOrder = async (amount) => {
-		const finalPrice = calculateFinalPrice(); // Get the final price including coupon discount if applied
 		const data = {
-			amount: finalPrice, // Razorpay accepts amount in paise, so multiply by 100
+			amount: amount, // Razorpay accepts amount in paise, so multiply by 100
 			currency: "INR",
 		};
 		try {
 			const response = await makeApi('/api/create-razorpay-order', 'POST', data);
-			console.log("----------------------------", response);
+			console.log("rezpay orders data", response);
+
 			handleRazorpayScreen(response.data.amount, response.data.id, response.data.created_at);
 		} catch (error) {
 			console.log(error);
 		} finally {
+
 		}
 	};
 	const handleRazorpayScreen = async (amount, orderId, order_created_at) => {
@@ -201,11 +199,9 @@ function Checkout() {
 					paymentMethod: selectPaymentMethod,
 					CartId: cartItem._id,
 				};
-				console.log("-----1");
 				submitOrder(data, setLoading, setOrderPlaced, navigate)
-				console.log("-----2");
 
-				;
+					;
 			},
 			prefill: {
 				name: "Vaibhav", // Optional user details

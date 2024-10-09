@@ -67,7 +67,7 @@ const MyOrders = () => {
 							</div>
 							<div className={styles.orderFooter}>
 								<span className={styles.orderTotal}>
-									Total: ₹{order.CartId.TotalProductPrice}
+									Total: ₹{order.CartId.totalPrice}
 								</span>
 								<Link to={`/userprofile/myorders/${order._id}`} className={styles.viewButton}>
 									View Details
