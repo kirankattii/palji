@@ -79,7 +79,7 @@ const Cart = () => {
     <>
       <ToastContainer />
       {fetchCartLoader ? (
-        <div className="All_Product_loader">
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
           <PrimaryLoader />
         </div>
       ) : completeCart.orderItems.length === 0 ? (

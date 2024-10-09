@@ -48,6 +48,7 @@ function ProductDetails() {
     try {
       setLoading(true);
       const response = await makeApi(`/api/get-single-product/${productId}`, "GET");
+
       setProduct(response.data.product);
       setSizes(response.data.sizes);
       setIncludes(response.data.include)
@@ -148,7 +149,10 @@ function ProductDetails() {
     }
   };
 
-  const closePopup = () => setShowPopup(false);
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
 
   if (loading) {
     return (
@@ -166,7 +170,7 @@ function ProductDetails() {
 
   return (
     <>
-      {showPopup && <LoginPopup setLoginPopup={closePopup} />}
+      {showPopup && <LoginPopup onClose={closePopup} />}
       <ToastContainer position="top-center" />
       <div>
         <div className="product_display_back_btn">
@@ -208,28 +212,53 @@ function ProductDetails() {
                 <h1>{product?.name}</h1>
                 <div>
                   <h2>₹{selectedSize?.FinalPrice || product?.PriceAfterDiscount}</h2>
-                  <div className={styles.sizeOptions}>
+
+                  {/* <div className={styles.sizeOptions}>
                     <h3>Select Size:</h3>
                     <div className="d-flex gap-2 flex-wrap">
+
+                     
+
                       {sizes.map(size => (
-                        <button
-                          key={size._id}
-                          // className={`${selectedSize?._id === size._id ? 'btn btn-success' : ''} btn btn-secondary`}
-                          className="btn"
-                          style={{
-                            backgroundColor: selectedSize?._id === size._id ? '#ff6b6b' : '', // custom color logic
-                            // color: 'white', // text color
-                            // borderColor: selectedSize?._id === size._id ? '#ff6b6b' : '', // border color
-                            color: selectedSize?._id === size._id ? '#fff' : '#000',
-                            // color: selectedSize?._id === size._id ? '#fff' : '#000',
-                          }}
-                          onClick={() => handleSizeChange(size)}
-                        >
-                          {size.size} {size.sizetype} - ₹{size.FinalPrice}
-                        </button>
+                        size.size !== 'null' && ( // Conditional check to exclude 'text'
+                          <button
+                            key={size._id}
+                            className="btn"
+                            style={{
+                              backgroundColor: selectedSize?._id === size._id ? '#ff6b6b' : '', // custom color logic
+                              color: selectedSize?._id === size._id ? '#fff' : '#000', // text color logic
+                            }}
+                            onClick={() => handleSizeChange(size)}
+                          >
+                            {size.size} {size.sizetype} - ₹{size.FinalPrice}
+                          </button>
+                        )
                       ))}
                     </div>
-                  </div>
+                  </div> */}
+                  {sizes.some(size => size.size !== null && size.size !== 'null') && ( // Check if there is at least one valid size
+                    <div className={styles.sizeOptions}>
+                      <h3>Select Size:</h3>
+                      <div className="d-flex gap-2 flex-wrap">
+                        {sizes.map(size => (
+                          size.size !== null && size.size !== 'null' && ( // Conditional check to exclude null and 'null'
+                            <button
+                              key={size._id}
+                              className="btn"
+                              style={{
+                                backgroundColor: selectedSize?._id === size._id ? '#ff6b6b' : '', // custom color logic
+                                color: selectedSize?._id === size._id ? '#fff' : '#000', // text color logic
+                              }}
+                              onClick={() => handleSizeChange(size)}
+                            >
+                              {size.size} {size.sizetype} - ₹{size.FinalPrice}
+                            </button>
+                          )
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                 </div>
               </div>
               <div className={styles.actions}>

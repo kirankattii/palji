@@ -117,9 +117,11 @@ function Checkout() {
 		e.preventDefault()
 		if (!selectedShippingAddress) {
 			toast.error("Please select a shipping address")
-		} else if (!selectedBillingAddress) {
+		}
+		else if (!selectedBillingAddress) {
 			toast.error("Please select a billing address")
-		} else {
+		}
+		else {
 			setCurrentPage("PAYMENT")
 		}
 	}

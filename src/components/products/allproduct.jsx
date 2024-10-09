@@ -293,8 +293,11 @@ function Allproduct({ search, category, minPrice, maxPrice, categoryName }) {
 			setAllProductLoader(true)
 			const response = await makeApi(
 				`/api/get-all-products?name=${search}&category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}&perPage=${ResultPerPage}&IsOutOfStock=false`,
+				// `get-all-products-for-admin`,
 				"GET"
 			)
+			console.log("all products ", response.data.product);
+
 			setProducts(response.data.products)
 			setToalProduct(response.data.totalProducts)
 			const a = Math.ceil(response.data.totalProducts / ResultPerPage)

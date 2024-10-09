@@ -247,9 +247,9 @@ const LoginPopup = ({ onClose }) => {
 			</div>
 			<div className="login-popup">
 				<div className="login-popup-content">
-					<div className="close_icon_login_popup">
+					<div className="close_icon_login_popup" onClick={onClose} >
 						<svg
-							onClick={onClose}
+
 							xmlns="http://www.w3.org/2000/svg"
 							width="16"
 							height="16"

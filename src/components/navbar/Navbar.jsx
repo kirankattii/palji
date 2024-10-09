@@ -147,34 +147,78 @@ const Navbar = () => {
 		}
 	}, [])
 
+	// const fetchUserDetail = async () => {
+	// 	try {
+	// 		const responce = await makeApi("/api/my-profile", "GET")
+	// 		setUserDetails(responce.data.user)
+	// 	} catch (error) {
+	// 		console.log(error)
+	// 	}
+	// }
+
 	const fetchUserDetail = async () => {
 		try {
+			setIsLoading(true);
 			const responce = await makeApi("/api/my-profile", "GET")
 			setUserDetails(responce.data.user)
 		} catch (error) {
 			console.log(error)
+		} finally {
+			setIsLoading(false);
 		}
 	}
 	useEffect(() => {
 		fetchUserDetail()
-	}, [userDatails?.userImage])
+	}, [])
+
+
+
 
 	return showNavbar ? (
 		<div className="navbar">
 			<div className="left-navbar">
 				{/* {isloggedIn ? ( */}
+				{/* <div style={{ cursor: "pointer", width: "40px", height: "40px" }}>
+					{isLoading &&
+						<>
+							{userDatails?.userImage ?
+								<img src={userDatails?.userImage} alt="" style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+									onClick={() => navigate(isloggedIn ? "/userprofile" : "/Signup")}
+								/> :
+								<img
+									onClick={() => navigate(isloggedIn ? "/userprofile" : "/Signup")}
+									src={homeImg.profile}
+									alt=""
+								/>
+							}
+						</> }
+
+				</div> */}
 				<div style={{ cursor: "pointer", width: "40px", height: "40px" }}>
-					{userDatails?.userImage ?
-						<img src={userDatails?.userImage} alt="" style={{ width: "40px", height: "40px", borderRadius: "50%" }}
-							onClick={() => navigate(isloggedIn ? "/userprofile" : "/Signup")}
-						/> :
-						<img
-							onClick={() => navigate(isloggedIn ? "/userprofile" : "/Signup")}
-							src={homeImg.profile}
-							alt=""
-						/>
-					}
+					{isLoading ? (
+						// Render a loader or a spinner while loading
+						<div className="spinLoader"></div>
+					) : (
+						<>
+							{userDatails?.userImage ? (
+								<img
+									src={userDatails?.userImage}
+									alt=""
+									style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+									onClick={() => navigate(isloggedIn ? "/userprofile" : "/Signup")}
+								/>
+							) : (
+								<img
+									onClick={() => navigate(isloggedIn ? "/userprofile" : "/Signup")}
+									src={homeImg.profile}
+									alt=""
+									style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+								/>
+							)}
+						</>
+					)}
 				</div>
+
 				<ul>
 					<li className={location.pathname === "/" ? "active" : ""}>
 						<Link to="/">HOME</Link>
@@ -227,7 +271,7 @@ const Navbar = () => {
 					</div>
 				</div>
 
-				{isloggedIn ? (
+				{/* {isloggedIn ? (
 					<div className="media-profile-icon">
 						<img
 							onClick={() => navigate("/userprofile")}
@@ -249,7 +293,19 @@ const Navbar = () => {
 						/>
 
 					</div>
-				)}
+				)} */}
+				<div className="media-profile-icon">
+					{userDatails?.userImage ?
+						<img src={userDatails?.userImage} alt="" style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+							onClick={() => navigate(isloggedIn ? "/userprofile" : "/Signup")}
+						/> :
+						<img
+							onClick={() => navigate(isloggedIn ? "/userprofile" : "/Signup")}
+							src={homeImg.profile}
+							alt=""
+						/>
+					}
+				</div>
 				{/* {isloggedIn && ( */}
 				<Link to={isloggedIn ? "/cart" : "/Signup"}>
 					<div className="nav-cart">
