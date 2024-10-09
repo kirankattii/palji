@@ -49,12 +49,26 @@ const Cart = () => {
 
   };
 
-  // Handle deleting all quantities of a product
+  // // Handle deleting all quantities of a product
+  // const handleDeleteClick = (productId, selectProductSize, quantity) => {
+  //   console.log('cliksdfgh');
+  //   setProductToDelete({ productId, selectProductSize, quantity });
+  //   setShowConfirmDialog(true);
+
+
+  // };
+
   const handleDeleteClick = (productId, selectProductSize, quantity) => {
+    console.log('Delete Clicked with productId:', productId);
+    console.log('Size ID:', selectProductSize);
+    console.log('Quantity:', quantity);
     setProductToDelete({ productId, selectProductSize, quantity });
-    setShowConfirmDialog(true);
+    setShowConfirmDialog(true);  // Ensure this is called correctly
 
   };
+
+
+
 
   const confirmDelete = async () => {
     if (productToDelete) {
@@ -104,9 +118,13 @@ const Cart = () => {
             <hr />
             {completeCart.orderItems.map((item, index) => (
               <div className="all_added_cart_list" key={index}>
-                <p className="cross" onClick={() => handleDeleteClick(item.productId._id, item.size._id, item.quantity)}>
+                {/* <p className="cross" onClick={() => handleDeleteClick(item.productId._id, item.size._id, item.quantity)}>
                   <img className="remove-cart" src={assets.cart_remove} alt="Remove" />
-                </p>
+                </p> */}
+                <div className="cross" onClick={() => handleDeleteClick(item.productId._id, item.size._id, item.quantity)}>
+                  <img className="remove-cart" src={assets.cart_remove} alt="Remove" />
+                </div>
+
                 <div>
                   <div className="cart-items-title cart-items-item">
                     <div>
@@ -114,13 +132,22 @@ const Cart = () => {
                       <p className="productItemName1">{item.productId?.name}  </p>
                     </div>
                     {/* <p className="productItemName2">{item.productId?.name} <br /> {`${item.size.size} ${item.size.sizetype}`}</p> */}
-                    <p className="productItemName2">
+                    {/* <p className="productItemName2">
                       {item.productId?.name}
                       <br />
                       {item.size.size !== "null" && item.size.sizetype !== "null" ? (
                         `${item.size.size} ${item.size.sizetype}`
                       ) : null}
+                    </p> */}
+                    <p className="productItemName2">
+                      {item.productId?.name}
+                      <br />
+                      {(item.size.size.toLowerCase() !== "null" && item.size.size.toLowerCase() !== "null") &&
+                        (item.size.sizetype.toLowerCase() !== "null" && item.size.sizetype.toLowerCase() !== "null") ? (
+                        `${item.size.size} ${item.size.sizetype}`
+                      ) : null}
                     </p>
+
 
                     {/* <p>₹{item.productId?.PriceAfterDiscount}</p> */}
                     <small>{` ₹${item.size.FinalPrice} x ${item.quantity} `}</small>
@@ -165,6 +192,7 @@ const Cart = () => {
               </div>
             </div>
           )}
+
         </div>
       )}
     </>

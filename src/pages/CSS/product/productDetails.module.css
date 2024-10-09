@@ -856,6 +856,11 @@
   justify-content: center;
 }
 
+
+.activeImage {
+  border: 2px solid #ff6b6b;
+}
+
 @media(max-width:600px) {
   /* .subImg img {
     width: 180px;

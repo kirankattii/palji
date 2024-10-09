@@ -187,8 +187,7 @@ function ProductDetails() {
               {/* Thumbnails */}
               <div className={styles.subImg}>
                 <div
-                  className={`${styles.subImg1} ${selectedImage === product.thumbnail ? styles.activeImage : ""
-                    }`}
+                  className={`${styles.subImg1} ${selectedImage === product.thumbnail ? styles.activeImage : ""}`}
                   onClick={() => handleImageClick(product.thumbnail)}
                 >
                   <img src={product.thumbnail} alt="Thumbnail" />
@@ -196,13 +195,13 @@ function ProductDetails() {
                 {product.image.slice(0, 3).map((imgUrl, index) => (
                   <div
                     key={index}
-                    className={`${styles.subImg1} ${selectedImage === imgUrl ? styles.activeImage : ""
-                      }`}
+                    className={`${styles.subImg1} ${selectedImage === imgUrl ? styles.activeImage : ""}`}
                     onClick={() => handleImageClick(imgUrl)}
                   >
                     <img src={imgUrl} alt={`Product Image ${index + 1}`} />
                   </div>
                 ))}
+
               </div>
             </div>
           </div>
@@ -236,7 +235,7 @@ function ProductDetails() {
                       ))}
                     </div>
                   </div> */}
-                  {sizes.some(size => size.size !== null && size.size !== 'null') && ( // Check if there is at least one valid size
+                  {/* {sizes.some(size => size.size !== null && size.size !== 'null') && ( 
                     <div className={styles.sizeOptions}>
                       <h3>Select Size:</h3>
                       <div className="d-flex gap-2 flex-wrap">
@@ -257,7 +256,31 @@ function ProductDetails() {
                         ))}
                       </div>
                     </div>
+                  )} */}
+
+                  {sizes.some(size => size.size && size.size.toLowerCase() !== 'null') && (
+                    <div className={styles.sizeOptions}>
+                      <h3>Select Size:</h3>
+                      <div className="d-flex gap-2 flex-wrap">
+                        {sizes.map(size => (
+                          size.size && size.size.toLowerCase() !== 'null' && ( // Conditional check to exclude null and 'null'
+                            <button
+                              key={size._id}
+                              className="btn"
+                              style={{
+                                backgroundColor: selectedSize?._id === size._id ? '#ff6b6b' : '', // custom color logic
+                                color: selectedSize?._id === size._id ? '#fff' : '#000', // text color logic
+                              }}
+                              onClick={() => handleSizeChange(size)}
+                            >
+                              {size.size} {size.sizetype} - ₹{size.FinalPrice}
+                            </button>
+                          )
+                        ))}
+                      </div>
+                    </div>
                   )}
+
 
                 </div>
               </div>

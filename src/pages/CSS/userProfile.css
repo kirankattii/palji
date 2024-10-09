@@ -341,3 +341,107 @@
     background-position: -200% 0;
   }
 }
+
+
+.logoutDialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Dark overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.logoutDialog {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+}
+
+.logoutDialog h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.logoutDialog p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.logoutDialog-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.confirm-button,
+.cancel-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.confirm-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.confirm-button:hover {
+  background-color: #d32f2f;
+}
+
+.cancel-button {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.cancel-button:hover {
+  background-color: #bdbdbd;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .logoutDialog {
+    padding: 15px;
+    width: 90%;
+  }
+
+  .logoutDialog h2 {
+    font-size: 1.25rem;
+  }
+
+  .logoutDialog p {
+    font-size: 0.9rem;
+  }
+
+  .confirm-button,
+  .cancel-button {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logoutDialog-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .confirm-button,
+  .cancel-button {
+    width: 100%;
+  }
+}
