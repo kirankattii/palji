@@ -272,7 +272,7 @@ function Allproduct({ search, category, minPrice, maxPrice, categoryName }) {
 	const [loading, setLoading] = useState(false)
 	const [wishlistItems, setWishlistItems] = useState([])
 	const [cartItems, setCartItems] = useState([])
-	const [ResultPerPage, setResultPerPage] = useState(18)
+	const [ResultPerPage, setResultPerPage] = useState(50)
 	const [currentPage, setCurrentPage] = useState(1)
 	const [totalPages, setTotalPages] = useState(0)
 	const [toalProduct, setToalProduct] = useState(0)
