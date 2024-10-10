@@ -178,6 +178,8 @@ function Checkout() {
 
 		const options = {
 			key: "rzp_test_DaA1MMEW2IUUYe",
+			// key: "rzp_test_WANgED2h9l3SKi",
+
 			currency: "INR",
 			amount: amount,
 			name: "USER ",
@@ -437,3 +439,4 @@ function Checkout() {
 }
 
 export default Checkout
+a

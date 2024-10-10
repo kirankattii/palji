@@ -272,7 +272,7 @@ function Allproduct({ search, category, minPrice, maxPrice, categoryName }) {
 	const [loading, setLoading] = useState(false)
 	const [wishlistItems, setWishlistItems] = useState([])
 	const [cartItems, setCartItems] = useState([])
-	const [ResultPerPage, setResultPerPage] = useState(50)
+	const [ResultPerPage, setResultPerPage] = useState(18)
 	const [currentPage, setCurrentPage] = useState(1)
 	const [totalPages, setTotalPages] = useState(0)
 	const [toalProduct, setToalProduct] = useState(0)
@@ -448,7 +448,7 @@ function Allproduct({ search, category, minPrice, maxPrice, categoryName }) {
 								</div>
 							</div>
 							<div className={styles.pagination}>
-								{Array.from({ length: totalPages }, (_, index) => index + 1).map(
+								{/* {Array.from({ length: totalPages }, (_, index) => index + 1).map(
 									(pageNumber) => (
 										<button
 											key={pageNumber}
@@ -458,6 +458,22 @@ function Allproduct({ search, category, minPrice, maxPrice, categoryName }) {
 											{pageNumber}
 										</button>
 									)
+								)} */}
+								{totalPages > 1 && (
+									<div className={styles.pagination}>
+										{Array.from({ length: totalPages }, (_, index) => index + 1).map(
+											(pageNumber) => (
+												<button
+													key={pageNumber}
+													className={`${styles.paginationButton} ${pageNumber === currentPage ? styles.active : ""
+														}`}
+													onClick={() => handlePageClick(pageNumber)}
+												>
+													{pageNumber}
+												</button>
+											)
+										)}
+									</div>
 								)}
 							</div>
 						</div>
