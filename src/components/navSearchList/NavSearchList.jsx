@@ -77,6 +77,7 @@ import "./navSearchList.css";
 import { Link } from "react-router-dom";
 
 const NavSearchList = ({ product, clearSearchInput, input, isLoading }) => {
+
 	return (
 		<div className="nav-search-list">
 			{/* Close Button */}
@@ -100,7 +101,7 @@ const NavSearchList = ({ product, clearSearchInput, input, isLoading }) => {
 						<div className="result-info">
 							<h3>{result.name}</h3>
 							{/* <p>₹{result.price}</p> */}
-							<p>₹{result.size[0].FinalPrice}</p>
+							<p>₹{result.price}</p>
 						</div>
 					</Link>
 				))
