@@ -261,17 +261,7 @@ const OrderSummary = () => {
 						<br />
 						Phone: {orderSummary.shippingAddress.phonenumber}
 					</p>
-					{isCashOnDelivery && (
-						<div className={styles.billingAddress}>
-							<p><strong>Billing Address: </strong>
-								{orderSummary.billingAddress.name} {" "}
-								{orderSummary.billingAddress.address}<br />
-								{orderSummary.billingAddress.city}, {orderSummary.billingAddress.state} {orderSummary.billingAddress.pincode}{" "}
-								{orderSummary.billingAddress.country}<br />
-								Phone: {orderSummary.billingAddress.phonenumber}
-							</p>
-						</div>
-					)}
+
 
 
 				</div>

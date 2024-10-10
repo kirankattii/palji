@@ -364,7 +364,7 @@ function Checkout() {
 								{/* Payment Method */}
 								<div className="shipping-address-container">
 									<div className="shipping-address-title">Payment Method</div>
-									<div>
+									<div className="cod-rzyp">
 										<div
 											className="address-item"
 											onClick={() =>

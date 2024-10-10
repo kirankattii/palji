@@ -2,7 +2,7 @@
   width: 100%;
   min-height: 100vh;
   padding: 0 100px;
-  padding-top: 10vh;
+  padding-top: 12vh;
   background: white;
 
   /* border-top: 2px solid black; */
@@ -10,6 +10,7 @@
 
 .userprofile-hr {
   margin-top: 50px;
+  display: none;
 }
 
 .user-sidebar-info {
@@ -17,6 +18,7 @@
   gap: 20px;
   width: 100%;
   /* align-items: first baseline; */
+  position: relative;
 }
 
 .userProfile-sidebar {
@@ -26,7 +28,11 @@
   flex-direction: column;
   align-items: start;
   gap: 10px;
+  position: -webkit-sticky;
 
+  position: sticky;
+  top: 100px;
+  height: 100%;
 }
 
 .userProfile-sidebar h1 {
@@ -134,7 +140,6 @@
   display: none;
 }
 
-.userprofiele-menu {}
 
 .logouy_btn {
   display: flex;
@@ -212,7 +217,6 @@
     gap: 50px;
   }
 
-  .userprofile-h1 img {}
 
   .userprofiele-menu {
     /* height: 30px; */
@@ -226,6 +230,7 @@
     display: flex;
     width: 40px;
     height: 40px;
+    display: none;
   }
 
   .userProfile-info {
@@ -235,7 +240,7 @@
   }
 
   .userProfile-sidebar {
-    position: absolute;
+    /* position: absolute; */
     /* box-shadow: 0; */
     /* padding-left: 10px; */
     /* padding-right: 30px; */
@@ -251,11 +256,7 @@
   }
 
   .userProfile-info {
-    margin-left: 50px;
-  }
-
-  .userProfile-sidebar p {
-    /* padding-right: 10px; */
+    margin-left: -20px;
   }
 
   .userProfile-sidebar img {
@@ -281,13 +282,17 @@
     padding: 0px 10px;
     font-size: 24px;
   }
+
+  .userprofile-h1 h1 {
+    display: none;
+  }
 }
 
 
 @media(max-width:600px) {
   .userProfile-sidebar h1 {
     font-size: 23px;
-    margin-top: 2px;
+    margin-top: 5px;
   }
 
   .user-flexcol p {
@@ -316,9 +321,27 @@
   .userprofile-h1 {
     position: absolute;
     display: flex;
-    margin-top: -10px;
+    margin-top: -20px;
     align-items: center;
     gap: 20px;
+  }
+
+  .userProfile {
+    padding-top: 1vh;
+  }
+
+  .userProfile-sidebar {
+    margin-top: 30px;
+    /* width: 300px; */
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+    position: -webkit-sticky;
+
+    position: sticky;
+    top: 30px;
+    height: 100%;
   }
 
 }

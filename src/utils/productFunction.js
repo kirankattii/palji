@@ -17,8 +17,8 @@ let cartCountListeners = []
 // 	}
 // }
 export const fetchCart = async (setCartItems, setCompleteCart, setFetchCartLoader) => {
-	setFetchCartLoader(true);
 	try {
+		setFetchCartLoader(true);
 		const response = await makeApi("/api/my-cart", "GET");
 		const cartItems = response.data.orderItems.map(item => ({
 			productId: item.productId._id,

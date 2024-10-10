@@ -55,7 +55,7 @@ function Checkout() {
 			toast("Please select payment method")
 			return
 		}
-		event.preventDefault() 
+		event.preventDefault()
 		const data = {
 			shippingAddress: selectedAddress,
 			paymentMethod: selectPaymentMethod,
@@ -240,3 +240,5 @@ function Checkout() {
 }
 
 export default Checkout
+
+

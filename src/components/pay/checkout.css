@@ -7,9 +7,13 @@
 .shipping-address-container button {
   font-size: 18px;
   padding: 5px 15px;
-  border-radius: 40px;
+  border-radius: 30px;
   cursor: pointer;
   background: transparent;
+}
+
+.main_checkout_div {
+  margin-top: -30px;
 }
 
 .a_checkout {
@@ -31,13 +35,25 @@
   margin-top: -20px;
 }
 
+.address-item {
+  cursor: pointer;
+}
+
 .address-label img {
   width: 150px;
 }
+
+
 
 @media(max-width:600px) {
   .checkout_to_cart {
     margin-left: 5px;
     margin-top: -20px;
   }
+
+  .cod-rzyp {
+    margin-top: -25px;
+  }
+
+
 }

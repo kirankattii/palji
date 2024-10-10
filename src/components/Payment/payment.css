@@ -49,9 +49,8 @@
 
 .address-item {
   display: flex;
-  padding: 20px;
+  padding: 15px 20px;
   border: 2px solid #E5087E;
-
   border-radius: 10px;
   width: 60%;
   margin-top: 20px;
@@ -59,6 +58,10 @@
   font-weight: 600;
   cursor: pointer;
 
+}
+
+.address-item label {
+  cursor: pointer;
 }
 
 .address-radio {
@@ -102,7 +105,7 @@
   }
 
   .address-item {
-    padding: 18px;
+    padding: 12px 18px;
     width: 90%;
     margin-top: 18px;
   }
@@ -130,6 +133,7 @@
   /* address */
   .shipping-address-container {
     width: 100%;
+    margin-top: -20px;
   }
 
   .shipping-address-title {
@@ -137,7 +141,7 @@
   }
 
   .address-item {
-    padding: 18px;
+    padding: 12px 18px;
     width: 100%;
     margin-top: 18px;
   }
