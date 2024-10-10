@@ -11,6 +11,9 @@ import { FaRegHeart } from "react-icons/fa"
 import { makeApi } from "../../api/callApi"
 import NavSearchList from "../navSearchList/NavSearchList"
 import ProfileDropdown from "../profileDropdown/ProfileDropdown"
+import { IoClose } from "react-icons/io5"
+import { FaTimes } from "react-icons/fa"
+
 import {
 	subscribeToCartCount,
 	unsubscribeFromCartCount,
@@ -147,14 +150,6 @@ const Navbar = () => {
 		}
 	}, [])
 
-	// const fetchUserDetail = async () => {
-	// 	try {
-	// 		const responce = await makeApi("/api/my-profile", "GET")
-	// 		setUserDetails(responce.data.user)
-	// 	} catch (error) {
-	// 		console.log(error)
-	// 	}
-	// }
 
 	const fetchUserDetail = async () => {
 		try {
@@ -177,23 +172,7 @@ const Navbar = () => {
 	return showNavbar ? (
 		<div className="navbar">
 			<div className="left-navbar">
-				{/* {isloggedIn ? ( */}
-				{/* <div style={{ cursor: "pointer", width: "40px", height: "40px" }}>
-					{isLoading &&
-						<>
-							{userDatails?.userImage ?
-								<img src={userDatails?.userImage} alt="" style={{ width: "40px", height: "40px", borderRadius: "50%" }}
-									onClick={() => navigate(isloggedIn ? "/userprofile" : "/Signup")}
-								/> :
-								<img
-									onClick={() => navigate(isloggedIn ? "/userprofile" : "/Signup")}
-									src={homeImg.profile}
-									alt=""
-								/>
-							}
-						</> }
 
-				</div> */}
 				<div style={{ cursor: "pointer", width: "40px", height: "40px" }}>
 					{isLoading ? (
 						// Render a loader or a spinner while loading
@@ -271,29 +250,7 @@ const Navbar = () => {
 					</div>
 				</div>
 
-				{/* {isloggedIn ? (
-					<div className="media-profile-icon">
-						<img
-							onClick={() => navigate("/userprofile")}
-							src={user_icon}
-							style={{ cursor: "pointer" }}
-							alt=""
-						/>
-					</div>
-				) : (
-					<div
-						className="responcive_profile_login"
-						style={{ cursor: "pointer" }}
-						onClick={() => navigate(isloggedIn ? "/userprofile" : "/Signup")}
-					>
-						<img
-							// onClick={() => navigate("/userprofile")}
-							src={homeImg.profile}
-							alt=""
-						/>
 
-					</div>
-				)} */}
 				<div className="media-profile-icon">
 					{userDatails?.userImage ?
 						<img src={userDatails?.userImage} alt="" style={{ width: "40px", height: "40px", borderRadius: "50%" }}
@@ -355,10 +312,15 @@ const Navbar = () => {
 								</Link>
 							</li>
 						</ul>
-						<GiHamburgerMenu
+						{/* <GiHamburgerMenu
 							className="menu-icon"
 							onClick={toggleMenu}
-						/>
+						/> */}
+						{moblieMenu ? (
+							<IoClose className="menu-icon" onClick={toggleMenu} />
+						) : (
+							<GiHamburgerMenu className="menu-icon" onClick={toggleMenu} />
+						)}
 					</nav>
 				</div>
 			</div>
