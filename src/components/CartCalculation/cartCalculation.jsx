@@ -173,7 +173,7 @@ function CartCalculation({
 				</div>
 				<div className={styles.row}>
 					<span>Discount:</span>
-					<span className={styles.savings}>-₹{roundedDiscount}</span>
+					<span className={styles.savings}>₹{roundedDiscount}</span>
 				</div>
 
 				<div className={styles.row}>

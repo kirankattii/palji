@@ -523,8 +523,8 @@
     position: absolute;
     display: flex;
     align-items: center;
-    right: 5px;
-    bottom: -12px;
+    right: 12px;
+    bottom: 38px;
     border: 1px solid red;
     border-radius: 50%;
     padding: 4px;
