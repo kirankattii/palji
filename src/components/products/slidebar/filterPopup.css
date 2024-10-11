@@ -179,7 +179,7 @@
 }
 
 .apply-button {
-  background: #e5087e;
+  background: var(--redPink);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -205,8 +205,9 @@
 }
 
 .filter-dropdown-body h4 {
-  color: #e5087e;
-  border-bottom: 2px solid #e5087e;
+  color: var(--redPink);
+  border-bottom: 2px solid var(--redPink);
+  );
   width: 140px;
   padding-bottom: 2px;
 }
@@ -214,7 +215,8 @@
 
 /* Customize the range track */
 .rc-slider .rc-slider-track {
-  background-color: #e5087e;
+  background-color: var(--redPink);
+  );
   /* Change to your desired color */
 }
 

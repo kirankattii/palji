@@ -47,7 +47,7 @@
   width: 100%;
   padding: 10px 20px;
   border-radius: 50px;
-  border: 2px solid #E5087E;
+  border: 2px solid var(--redPink);
   outline: 0;
 }
 
@@ -64,10 +64,10 @@
   width: 100%;
   text-align: center;
   transition: all 0.5s ease;
-  border: 2px solid #E5087E;
+  border: 2px solid var(--redPink);
   padding: 10px;
   border-radius: 50px;
-  background: #E5087E;
+  background: var(--redPink);
   border-radius: 10px;
   color: #fff;
   cursor: pointer;
@@ -99,7 +99,7 @@
 .input-ranges {
   width: 100%;
   -webkit-appearance: none;
-  background-color: #E5087E;
+  background-color: var(--redPink);
   height: 4px;
   outline: none;
   margin: 10px 0;
@@ -112,7 +112,7 @@
   width: 17px;
   height: 17px;
   border-radius: 50%;
-  background-color: #E5087E;
+  background-color: var(--redPink);
   cursor: pointer;
 }
 
@@ -264,7 +264,7 @@
     align-items: center;
     gap: 10px;
     border-radius: 50px;
-    border: 2px solid #E5087E;
+    border: 2px solid var(--redPink);
     justify-content: space-between;
   }
 
@@ -277,7 +277,7 @@
 
   .media_all_product_search div {
     font-size: 30px;
-    color: #E5087E;
+    color: var(--redPink);
     font-weight: 200;
     padding-right: 8px;
     align-items: center;
@@ -290,7 +290,7 @@
   }
 
   .media_filter {
-    border: 2px solid #E5087E;
+    border: 2px solid var(--redPink);
     display: flex;
     justify-content: center;
     border-radius: 50px;
