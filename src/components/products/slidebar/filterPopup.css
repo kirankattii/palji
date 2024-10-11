@@ -207,7 +207,7 @@
 .filter-dropdown-body h4 {
   color: var(--redPink);
   border-bottom: 2px solid var(--redPink);
-  );
+
   width: 140px;
   padding-bottom: 2px;
 }
@@ -216,7 +216,7 @@
 /* Customize the range track */
 .rc-slider .rc-slider-track {
   background-color: var(--redPink);
-  );
+
   /* Change to your desired color */
 }
 

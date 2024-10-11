@@ -158,6 +158,7 @@ function CartCalculation({
 	const roundedFinal = Math.round(Final);
 
 	return (
+
 		<div className={styles.orderSummary}>
 			<h2 className={styles.title}>Order Details</h2>
 

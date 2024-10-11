@@ -57,3 +57,8 @@
 
 
 }
+
+.styles_checkout_coupan {
+  display: flex;
+  flex-direction: column;
+}

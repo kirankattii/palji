@@ -61,7 +61,7 @@ const AddCoupan = () => {
       setErrorMessage("Error adding Coupan. Please try again.");
     }
   };
-  
+
   useEffect(() => {
     async function fetchCategories() {
       try {

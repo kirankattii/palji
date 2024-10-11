@@ -25,6 +25,8 @@ function Checkout() {
 	const [cartItem, setCartItem] = useState([])
 	const [selectedShippingAddress, setSelectedShippingAddress] = useState(null)
 	const [selectedBillingAddress, setSelectedBillingAddress] = useState(null)
+	const [coupanCode, setCoupanCode] = useState(null)
+
 	const [currentPage, setCurrentPage] = useState("CHECKOUT")
 	const [orderPlaced, setOrderPlaced] = useState(false)
 	const [isSubmitDisabled, setIsSubmitDisabled] = useState(false)
@@ -225,7 +227,18 @@ function Checkout() {
 
 
 
-
+	console.log("coupanCode", coupanCode)
+	const SubmitCoupan = async (e) => {
+		e.preventDefault()
+		try {
+			const applyCoupan = await makeApi("/api/apply-coupon", "POST", {
+				coupanCode: coupanCode,
+			})
+			console.log(applyCoupan.data.message)
+		} catch (error) {
+			console.log(error)
+		}
+	}
 
 	return (
 		<>
@@ -336,20 +349,36 @@ function Checkout() {
 									</div> */}
 								</div>
 								{/* Proceed to Payment */}
-								<div onClick={(e) => manageCurrentPage(e)}>
-									<CartCalculation
-										tax={0}
-										shipping={0}
-										total={cartItem?.totalPriceWithoutDiscount}
-										// CoupanApplied={appliedCoupon}
-										CoupanApplied={appliedCoupon ? couponDiscount : cartItem?.totalPriceWithoutDiscount}
+								<div className="styles_checkout_coupan">
+									<div className="cart-promocode">
+										<h2>HAVE A COUPON ?</h2>
+										<div className="cart-promocode-input">
+											<input
+												type="text"
+												placeholder="COUPON CODE"
+												value={coupanCode}
+												onChange={(e) => setCoupanCode(e.target.value)}
+											/>
+											<button onClick={(e) => SubmitCoupan(e)}>APPLY</button>
+										</div>
+									</div>
 
-										// Final={calculateFinalPrice()}
-										Final={cartItem?.totalPrice}
+									<div onClick={(e) => manageCurrentPage(e)}>
 
-										ButtonName="PROCEED TO PAYMENT"
-									/>
-									{/* <CouponFunctions /> */}
+										<CartCalculation
+											tax={0}
+											shipping={0}
+											total={cartItem?.totalPriceWithoutDiscount}
+											// CoupanApplied={appliedCoupon}
+											CoupanApplied={appliedCoupon ? couponDiscount : cartItem?.totalPriceWithoutDiscount}
+
+											// Final={calculateFinalPrice()}
+											Final={cartItem?.totalPrice}
+
+											ButtonName="PROCEED TO PAYMENT"
+										/>
+										{/* <CouponFunctions /> */}
+									</div>
 								</div>
 							</div>
 						</div>
