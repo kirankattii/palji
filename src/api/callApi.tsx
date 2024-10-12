@@ -22,7 +22,6 @@ export const makeApi = async (
 			method,
 			// url: `http://localhost:7000${endpoint}`,
 			url: `https://new-palji-backend-1.onrender.com${endpoint}`,
-			// url: `https://sk-backend-uvv5.onrender.com${endpoint}`,
 			headers,
 			data,
 		}

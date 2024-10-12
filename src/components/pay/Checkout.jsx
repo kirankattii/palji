@@ -350,7 +350,7 @@ function Checkout() {
 								</div>
 								{/* Proceed to Payment */}
 								<div className="styles_checkout_coupan">
-									<div className="cart-promocode">
+									{/* <div className="cart-promocode">
 										<h2>HAVE A COUPON ?</h2>
 										<div className="cart-promocode-input">
 											<input
@@ -361,7 +361,7 @@ function Checkout() {
 											/>
 											<button onClick={(e) => SubmitCoupan(e)}>APPLY</button>
 										</div>
-									</div>
+									</div> */}
 
 									<div onClick={(e) => manageCurrentPage(e)}>
 
