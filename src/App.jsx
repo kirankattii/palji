@@ -39,6 +39,7 @@ import NewProductPage from "./components/NewProductPage/NewProductPage.jsx"
 import Product from "./pages/products.jsx"
 import PrivacyPolicy from "./PrivacyPolicy/PrivacyPolicy.jsx"
 import ShippingProcess from "./components/ShippingProcess/ShippingProcess.jsx"
+import LatestOrder from "./components/LatestOrder/LastestOrder.jsx"
 
 function App() {
 	// const [categories, setCategories] = useState([])
@@ -170,6 +171,7 @@ function App() {
 					path="/:productdetails/:productdetails"
 					element={<ProductDetails />}
 				/>
+				<Route path="/latest-order" element={<LatestOrder />} />
 				{/* <Route
 					path="/admin/*"
 					element={<Admin />}
@@ -198,6 +200,7 @@ function App() {
 					path="/test"
 					element={<TestingCart />}
 				/>
+
 				{/* <Route
 					path="/userprofile/myaddress"
 					element={<MyAddress />}
