@@ -12,7 +12,7 @@ import { addToCart, removeFromCart, fetchCart } from "../../utils/productFunctio
 import AddIcon from "../../assets/add_icon_green.png";
 import RemoveIcon from "../../assets/remove_icon_red.png";
 import "../../pages/CSS/product/productDetails.css";
-
+import { GoArrowLeft } from "react-icons/go";
 
 function ProductDetails() {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ function ProductDetails() {
   const [productNuturitions, setProductNuturitions] = useState([]);
   const [productLoaders, setProductLoaders] = useState({});
   const [fetchCartLoader, setFetchCartLoader] = useState(false);
-
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -173,8 +173,9 @@ function ProductDetails() {
       {showPopup && <LoginPopup onClose={closePopup} />}
       <ToastContainer position="top-center" />
       <div>
-        <div className="product_display_back_btn">
-          <BackButton pageLocation="/product/all-products" />
+        <div className={styles.backButton} onClick={() => navigate(-1)}>
+          {/* <BackButton pageLocation="/product/all-products" /> */}
+          <GoArrowLeft />
         </div>
         <div className={styles.productContainer}>
           <div className={styles.imgContainer}>

@@ -899,6 +899,14 @@
   margin: 10px 0;
 }
 
+.backButton {
+  font-size: 30px;
+  position: absolute;
+  margin-top: 90px;
+  cursor: pointer;
+  z-index: 1;
+}
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);

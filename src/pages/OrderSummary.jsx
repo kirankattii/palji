@@ -300,6 +300,12 @@ const OrderSummary = () => {
 						<span><strong>Subtotal:</strong></span>
 						<span>₹ {orderSummary.CartId.totalPrice} </span>
 					</div>
+					{orderSummary.CartId.couapnDiscount > 0 && (
+						<div className={styles.totalRow}>
+							<span><strong>Coupan Discount:</strong></span>
+							<span>₹ {orderSummary.CartId.couapnDiscount}</span>
+						</div>
+					)}
 					<div className={styles.totalRow}>
 						<span><strong>Shipping Price:</strong></span>
 						{/* <span>₹ {orderSummary.CartId.shippingPrice}  </span> */}
