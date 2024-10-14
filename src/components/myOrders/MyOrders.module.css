@@ -154,7 +154,7 @@
 }
 
 .viewButton {
-  background-color: #007bff;
+  background-color: var(--redPink);
   color: white;
   padding: 8px 15px;
   border-radius: 20px;

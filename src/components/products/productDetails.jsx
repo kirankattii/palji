@@ -211,7 +211,7 @@ function ProductDetails() {
               <div className={styles.productPriceName}>
                 <h1>{product?.name}</h1>
                 <div>
-                  <h2>₹{selectedSize?.FinalPrice || product?.PriceAfterDiscount}</h2>
+                  <h2>₹{selectedSize?.FinalPrice} <span>₹{selectedSize?.price}</span></h2>
 
                   {/* <div className={styles.sizeOptions}>
                     <h3>Select Size:</h3>

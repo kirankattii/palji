@@ -207,6 +207,21 @@ input[type=file]::file-selector-button:hover {
   color: transparent;
 }
 
+.userupdatebackButton {
+  font-size: 30px;
+  position: absolute;
+  margin-top: 90px;
+  cursor: pointer;
+  z-index: 1;
+  margin-left: 100px;
+}
+
+@media(max-width:1000px) {
+  .userupdatebackButton {
+    margin-left: 10px;
+    font-size: 26px;
+  }
+}
 
 @media (max-width:550px) {
   .edit-form {

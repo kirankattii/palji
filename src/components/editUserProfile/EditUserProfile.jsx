@@ -266,6 +266,7 @@ import { makeApi } from "../../api/callApi"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import axios from "axios"
+import { GoArrowLeft } from "react-icons/go"
 
 const EditUserProfile = () => {
 	const navigate = useNavigate()
@@ -377,6 +378,10 @@ const EditUserProfile = () => {
 	return (
 		<>
 			<ToastContainer autoClose={1300} />
+			<div className="userupdatebackButton" onClick={() => navigate(-1)}>
+				{/* <BackButton pageLocation="/product/all-products" /> */}
+				<GoArrowLeft />
+			</div>
 			<div className="editUserProfile">
 				<form
 					className="edit-form"
