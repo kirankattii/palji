@@ -1,7 +1,3 @@
-
-
-
-
 // import React, { useEffect, useState } from "react"
 // import styles from "../../pages/CSS/product/allProduct.module.css"
 // import { IoIosHeart } from "react-icons/io"
@@ -27,7 +23,7 @@
 // 	const [loading, setLoading] = useState(false)
 // 	const [wishlistItems, setWishlistItems] = useState([])
 // 	const [cartItems, setCartItems] = useState([])
-// 	const [ResultPerPage, setResultPerPage] = useState(50)
+// 	const [ResultPerPage, setResultPerPage] = useState(120)
 // 	const [currentPage, setCurrentPage] = useState(1)
 // 	const [totalPages, setTotalPages] = useState(0)
 // 	const [toalProduct, setToalProduct] = useState(0)
@@ -47,11 +43,11 @@
 // 		try {
 // 			setAllProductLoader(true)
 // 			const response = await makeApi(
-// 				// `/api/get-all-products?name=${search}&category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}&perPage=${ResultPerPage}&IsOutOfStock=false`,
-// 				`/api/get-all-products`, //vaibhav-rathore
+// 				`/api/get-all-products?name=${search}&category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}&perPage=${ResultPerPage}&IsOutOfStock=false`,
+// 				// `get-all-products-for-admin`,
 // 				"GET"
 // 			)
-// 			console.log("ress", response.data)
+// 			console.log("all products ", response.data.product);
 
 // 			setProducts(response.data.products)
 // 			setToalProduct(response.data.totalProducts)
@@ -64,25 +60,10 @@
 // 		}
 // 	}
 
-// 	const fetchProducts = async () => {
-// 		try {
-// 			setAllProductLoader(true);
-// 			const response = await makeApi("/api/get-all-products", "GET");
-// 			console.log(response);  // Log the response
-// 			setProducts(response.data.products); // Simplified without filters
-// 			setToalProduct(response.data.totalProducts);
-// 		} catch (error) {
-// 			console.log(error);
-// 		} finally {
-// 			setAllProductLoader(false);
-// 		}
-// 	};
-
 // 	useEffect(() => {
-// 		fetchProduct() // Reset to the first page when filters change
-// 		// setCurrentPage(1) // Reset the current page to 1
-// 		fetchProducts()
-// 		// fetchCart(setCartItems)
+// 		fetchProduct(1) // Reset to the first page when filters change
+// 		setCurrentPage(1) // Reset the current page to 1
+// 		fetchCart(setCartItems)
 // 	}, [search, category, minPrice, maxPrice, ResultPerPage])
 
 // 	useEffect(() => {
@@ -202,11 +183,16 @@
 // 											</Link>
 // 											<div className={styles.productContent}>
 // 												<p className={styles.name}>{item.name}</p>
-// 												<p className={styles.productPrice}>₹{item.PriceAfterDiscount}
-// 													{item.discountPercentage > 0 && (
-// 														<span>{item?.price} </span>
-// 													)}
-// 												</p>
+// 												{item.size.length > 0 ? (
+// 													<p className={styles.productPrice}>
+// 														₹{item.size[0].FinalPrice} {/* Assuming you want to show the price of the first size */}
+// 														{item.size[0].discountPercentage > 0 && (
+// 															<span> ₹{item.size[0].price}</span>
+// 														)}
+// 													</p>
+// 												) : (
+// 													<p className={styles.productPrice}>Price not available</p>
+// 												)}
 // 											</div>
 // 										</div>
 // 									))}
@@ -224,6 +210,22 @@
 // 										</button>
 // 									)
 // 								)}
+// 								{/* {totalPages > 1 && (
+// 									<div className={styles.pagination}>
+// 										{Array.from({ length: totalPages }, (_, index) => index + 1).map(
+// 											(pageNumber) => (
+// 												<button
+// 													key={pageNumber}
+// 													className={`${styles.paginationButton} ${pageNumber === currentPage ? styles.active : ""
+// 														}`}
+// 													onClick={() => handlePageClick(pageNumber)}
+// 												>
+// 													{pageNumber}
+// 												</button>
+// 											)
+// 										)}
+// 									</div>
+// 								)} */}
 // 							</div>
 // 						</div>
 // 					)}
@@ -235,16 +237,6 @@
 // }
 
 // export default Allproduct
-
-
-
-
-
-
-
-
-
-
 
 
 import React, { useEffect, useState } from "react"
@@ -282,6 +274,9 @@ function Allproduct({ search, category, minPrice, maxPrice, categoryName }) {
 	const [IsLogin, setIsLogin] = useState(false)
 	const [showPopup, setShowPopup] = useState(false)
 	const [productLoaders, setProductLoaders] = useState({})
+	const [completeCart, setCompleteCart] = useState([]);
+	const [quantityLoading, setQuantityLoading] = useState({});
+
 
 	useEffect(() => {
 		const token = localStorage.getItem("token")
@@ -313,93 +308,59 @@ function Allproduct({ search, category, minPrice, maxPrice, categoryName }) {
 		fetchProduct(1) // Reset to the first page when filters change
 		setCurrentPage(1) // Reset the current page to 1
 		fetchCart(setCartItems)
+		fetchCartItems()
 	}, [search, category, minPrice, maxPrice, ResultPerPage])
 
 	useEffect(() => {
 		fetchProduct() // Fetch products whenever the current page changes
 	}, [currentPage])
 
-	useEffect(() => {
-		const fetchWishlist = async () => {
-			try {
-				setAddToWishlistLoader(true)
-				const response = await makeApi("/api/get-my-wishlist", "GET")
-				const wishlistIds = response.data.wishlist
-					.filter((item) => item.products !== null)
-					.map((item) => item.products._id)
-				setWishlistItems(wishlistIds)
-			} catch (error) {
-				console.log(error)
-			} finally {
-				setAddToWishlistLoader(false)
-			}
+	const fetchCartItems = async () => {
+		try {
+			await fetchCart(setCartItems, setCompleteCart, setAddTocartLoader);
+		} catch (error) {
+			console.error("Error fetching cart items:", error);
 		}
+	};
 
-		fetchWishlist()
-	}, [])
-
-	const isInCart = (productId) => {
-		return cartItems.some((item) => item.productId === productId)
-	}
-
-	const closePopup = () => {
-		setShowPopup(false)
-	}
-
-	const toggleWishlist = async (id) => {
+	const handleIncreaseQuantity = async (productId, size) => {
 		if (!IsLogin) {
-			setShowPopup(true)
-		} else {
+			setShowPopup(true);
+			return;
+		}
+		const cartItem = cartItems.find(item => item.productId === productId && item.size === size._id);
+		if (size.quantity === cartItem?.quantity) {
+			toast('Cannot add more than available quantity.', { type: 'error' });
+			return;
+		}
+		try {
+			setQuantityLoading(prev => ({ ...prev, [productId]: true }));
+			await addToCart(productId, setIsLogin, setShowPopup, fetchCartItems, setCartItems, setProductLoaders, size._id);
+		} catch (error) {
+			console.error("Error increasing quantity:", error);
+		} finally {
+			setQuantityLoading(prev => ({ ...prev, [productId]: false }));
+		}
+	};
+
+
+	const handleDecreaseQuantity = async (productId, size) => {
+		const cartItem = cartItems.find(item => item.productId === productId && item.size === size._id);
+		if (cartItem && cartItem.quantity > 0) {
 			try {
-				setAddToWishlistLoader((prevState) => ({
-					...prevState,
-					[id]: true,
-				}))
-				const method = "POST"
-				const endpoint = `/api/create-wishlist/${id}`
-				const data = await makeApi(endpoint, method)
-				setWishlistItems((prevState) => {
-					if (prevState.includes(id)) {
-						return prevState.filter((itemId) => itemId !== id)
-					} else {
-						return [...prevState, id]
-					}
-				})
+				await removeFromCart(productId, setProductLoaders, setCartItems, fetchCartItems, size._id);
 			} catch (error) {
-				console.log(error)
-			} finally {
-				setAddToWishlistLoader((prevState) => ({
-					...prevState,
-					[id]: false,
-				}))
+				console.error("Error decreasing quantity:", error);
 			}
 		}
-	}
+	};
+
 
 	const handlePageClick = (pageNumber) => {
 		setCurrentPage(pageNumber)
 		window.scrollTo(0, 0) // Scrolls to the top of the page
 	}
 
-	const getProductQuantity = (productId) => {
-		const cartItem = cartItems.find((item) => item.productId === productId)
-		return cartItem ? cartItem.quantity : 0
-	}
-
-	const handleAddToCart = (productId, quantity, availableQuantity) => {
-		if (quantity < availableQuantity) {
-			addToCart(
-				productId,
-				setIsLogin,
-				setShowPopup,
-				fetchCart,
-				setCartItems,
-				setProductLoaders
-			)
-		} else {
-			toast("Cannot add more than available quantity.", { type: "error" })
-		}
-	}
 
 	return (
 		<div className={styles.mainContainer}>
@@ -432,16 +393,47 @@ function Allproduct({ search, category, minPrice, maxPrice, categoryName }) {
 											</Link>
 											<div className={styles.productContent}>
 												<p className={styles.name}>{item.name}</p>
-												{item.size.length > 0 ? (
-													<p className={styles.productPrice}>
-														₹{item.size[0].FinalPrice} {/* Assuming you want to show the price of the first size */}
-														{item.size[0].discountPercentage > 0 && (
-															<span> ₹{item.size[0].price}</span>
+												<div className={styles.pricecart}>
+													{item.size.length > 0 &&
+														<p className={styles.productPrice}>
+															₹{item.size[0].FinalPrice} {/* Assuming you want to show the price of the first size */}
+															{item.size[0].discountPercentage > 0 && (
+																<span> ₹{item.size[0].price}</span>
+															)}
+														</p>
+													}
+													<div className={styles.cartActions}>
+														{cartItems.some(cartItem => cartItem.productId === item._id && cartItem.size === item.size[0]._id) ? (
+															<div className={styles.cartIncDec}>
+																<img
+																	src={RemoveIcon}
+																	alt=""
+																	onClick={() => handleDecreaseQuantity(item._id, item.size[0])}
+																/>
+																{quantityLoading[item._id] ? (
+																	<div className={styles.loader}>
+																	</div>
+																) : (
+																	<p>{cartItems.find(cartItem => cartItem.productId === item._id && cartItem.size === item.size[0]._id)?.quantity || 0}</p>
+																)}
+																<img
+																	src={AddIcon}
+																	alt=""
+																	onClick={() => handleIncreaseQuantity(item._id, item.size[0])}
+																/>
+															</div>
+														) : (
+															<button
+																className={`${styles.addToCartBtn} ${quantityLoading[item._id] ? styles.disabledBtn : ''}`}
+																onClick={() => handleIncreaseQuantity(item._id, item.size[0])}
+																disabled={quantityLoading[item._id]}
+															>
+																Add to Cart
+															</button>
+
 														)}
-													</p>
-												) : (
-													<p className={styles.productPrice}>Price not available</p>
-												)}
+													</div>
+												</div>
 											</div>
 										</div>
 									))}
@@ -486,26 +478,3 @@ function Allproduct({ search, category, minPrice, maxPrice, categoryName }) {
 }
 
 export default Allproduct
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
