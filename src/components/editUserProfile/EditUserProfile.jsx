@@ -342,7 +342,9 @@ const EditUserProfile = () => {
 					}
 				},
 			})
+
 			navigate("/userprofile")
+			window.location.reload();
 		} catch (error) {
 			console.log("Error updating user details:", error.response.data.message)
 			toast.error(error.response.data.message)
@@ -379,7 +381,6 @@ const EditUserProfile = () => {
 		<>
 			<ToastContainer autoClose={1300} />
 			<div className="userupdatebackButton" onClick={() => navigate(-1)}>
-				{/* <BackButton pageLocation="/product/all-products" /> */}
 				<GoArrowLeft />
 			</div>
 			<div className="editUserProfile">

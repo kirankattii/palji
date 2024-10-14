@@ -267,11 +267,10 @@ const Signup = () => {
 			if (responseData.success) {
 				localStorage.setItem("token", responseData.token)
 				setSignupSuccess(true)
-				toast.success(responseData.message, {
-					onClose: () => {
-						navigate("/")
-					},
-				})
+				toast.success(responseData.message)
+				navigate("/")
+				window.location.reload();
+
 			} else {
 				console.log("Login failed:", responseData.error)
 				// Handle login failure
@@ -320,10 +319,12 @@ const Signup = () => {
 				localStorage.setItem("token", responseData.token)
 				setSignupSuccess(true)
 				toast.success(responseData.message || "Sign up Successfully", {
+
 					onClose: () => {
 						navigate("/")
 					},
 				})
+
 			} else {
 				console.log("Signup failed:", responseData.error)
 				// Handle signup failure
@@ -341,7 +342,7 @@ const Signup = () => {
 	}
 	return (
 		<>
-			<ToastContainer />
+			<ToastContainer autoClose={1500} />
 			<div className="signup">
 				<div className="signup-form">
 					<div className="enter-name">
@@ -394,14 +395,17 @@ const Signup = () => {
 						value={formData.password}
 						onChange={changeHandler}
 					/>
-					<button
-						onClick={() => {
-							state === "Login" ? login() : signup()
-						}}
-						disabled={loading}
-					>
-						{loading ? "Loading..." : "Continue"}
-					</button>
+					{!loading &&
+						<button
+							onClick={() => {
+								state === "Login" ? login() : signup()
+							}}
+							disabled={loading} // Disable button if form is invalid or loading
+
+						>
+							{loading ? "Loading..." : "Continue"}
+						</button>
+					}
 					{state === "Login" ? (
 						<Link
 							to="/Forgot-Password"

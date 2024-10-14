@@ -230,6 +230,15 @@
   padding-top: 5px;
 }
 
+.userupdatebackButton {
+  font-size: 30px;
+  position: absolute;
+  margin-top: 90px;
+  cursor: pointer;
+  z-index: 1;
+  margin-left: 100px;
+}
+
 @media (max-width: 600px) {
   .invoiceDetails {
     flex-direction: column;

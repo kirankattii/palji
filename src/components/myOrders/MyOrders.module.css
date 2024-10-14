@@ -59,7 +59,7 @@
 
 .orderId {
   font-weight: bold;
-  color: #007bff;
+  color: var(--redPink);
 }
 
 .orderDate {
@@ -164,7 +164,7 @@
 }
 
 .viewButton:hover {
-  background-color: #0056b3;
+  background-color: #f03f51;
 }
 
 @media (max-width: 768px) {
