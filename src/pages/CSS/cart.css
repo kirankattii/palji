@@ -5,6 +5,8 @@
   width: 100%;
 }
 
+
+
 .cart-container {
 
   min-height: 100vh;
@@ -47,6 +49,10 @@
   margin-top: -120px;
 }
 
+.cart-item {
+  width: 100%;
+}
+
 .cart-items-title {
   display: grid;
   grid-template-columns: 4fr 3fr 3fr 3fr;
@@ -62,7 +68,6 @@
   margin: auto;
   justify-content: center;
   text-align: center;
-  width: 100%;
 }
 
 .cart-items-item {
@@ -633,7 +638,9 @@
 }
 
 @media (max-width:500px) {
-
+  .cart-items-item .productthumbnailname {
+    margin-left: -10px;
+  }
 
   .cart-order-summary {
     padding: 30px;
