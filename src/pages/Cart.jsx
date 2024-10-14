@@ -108,8 +108,8 @@ const Cart = () => {
         <div className="cart-container">
           <div className="cart-item">
             <div className="cart-items-title cart-items-title2">
-              <p>Items</p>
-              <p className="productItemName2">Name</p>
+              <p><span className="productItemName1span">Product</span> Name</p>
+              {/* <p className="productItemName2">Name</p> */}
               <p>Price</p>
               <p className="quantity_heading">Qty</p>
               <p className="cartItemTotal">Total:</p>
@@ -118,39 +118,31 @@ const Cart = () => {
             <hr />
             {completeCart.orderItems.map((item, index) => (
               <div className="all_added_cart_list" key={index}>
-                {/* <p className="cross" onClick={() => handleDeleteClick(item.productId._id, item.size._id, item.quantity)}>
-                  <img className="remove-cart" src={assets.cart_remove} alt="Remove" />
-                </p> */}
+
                 <div className="cross" onClick={() => handleDeleteClick(item.productId._id, item.size._id, item.quantity)}>
                   <img className="remove-cart" src={assets.cart_remove} alt="Remove" />
                 </div>
 
                 <div>
                   <div className="cart-items-title cart-items-item">
-                    <div>
+
+                    <div className="productthumbnailname">
                       <img src={item?.productId?.thumbnail} alt="" />
                       <p className="productItemName1">{item.productId?.name}  </p>
                     </div>
-                    {/* <p className="productItemName2">{item.productId?.name} <br /> {`${item.size.size} ${item.size.sizetype}`}</p> */}
+
                     {/* <p className="productItemName2">
-                      {item.productId?.name}
-                      <br />
-                      {item.size.size !== "null" && item.size.sizetype !== "null" ? (
-                        `${item.size.size} ${item.size.sizetype}`
-                      ) : null}
-                    </p> */}
-                    <p className="productItemName2">
                       {item.productId?.name}
                       <br />
                       {(item.size.size.toLowerCase() !== "null" && item.size.size.toLowerCase() !== "null") &&
                         (item.size.sizetype.toLowerCase() !== "null" && item.size.sizetype.toLowerCase() !== "null") ? (
                         `${item.size.size} ${item.size.sizetype}`
                       ) : null}
-                    </p>
+                    </p> */}
 
 
                     {/* <p>₹{item.productId?.PriceAfterDiscount}</p> */}
-                    <small>{` ₹${item.size.FinalPrice} x ${item.quantity} `}</small>
+                    <p>{` ₹${item.size.FinalPrice} x ${item.quantity} `}</p>
 
                     <div className="cartPageButton">
                       <img
