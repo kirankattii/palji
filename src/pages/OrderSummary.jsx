@@ -198,7 +198,7 @@
 
 
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { makeApi } from "../api/callApi";
 import Primaryloader from "../components/loaders/primaryloader";
 import styles from "./OrderSummary.module.css";
@@ -208,6 +208,7 @@ import { GoArrowLeft } from "react-icons/go";
 const OrderSummary = () => {
 	const [orderSummary, setOrderSummary] = useState(null);
 	const { ordersummary } = useParams();
+	const navigate = useNavigate()
 	const isCashOnDelivery = orderSummary?.paymentMethod.toLowerCase() === "cash on delivery";
 	const isRazorpay = orderSummary?.paymentMethod.toLowerCase() === "razorpay";
 
@@ -235,9 +236,10 @@ const OrderSummary = () => {
 	}
 
 	return (
-		<div>	<div className="userupdatebackButton" onClick={() => navigate(-1)}>
-			<GoArrowLeft />
-		</div>
+		<div>
+			<div className={styles.userupdatebackButton} onClick={() => navigate(-1)}>
+				<GoArrowLeft />
+			</div>
 			<div className={styles.invoiceContainer}>
 				<h1 className={styles.invoiceTitle}>Order Details</h1>
 

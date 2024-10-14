@@ -233,10 +233,29 @@
 .userupdatebackButton {
   font-size: 30px;
   position: absolute;
-  margin-top: 90px;
+  margin-top: 0px;
   cursor: pointer;
   z-index: 1;
   margin-left: 100px;
+}
+
+@media(max-width:1000px) {
+  .userupdatebackButton {
+    margin-left: 10px;
+    font-size: 26px;
+  }
+}
+
+@media(max-width:900px) {
+  .userupdatebackButton {
+    margin-left: 10px;
+    font-size: 26px;
+    margin-top: -40px;
+  }
+
+  .invoiceContainer {
+    margin-top: 130px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -263,5 +282,11 @@
   .footerSection {
     display: flex;
     justify-content: center;
+  }
+
+  .userupdatebackButton {
+    margin-left: 10px;
+    font-size: 26px;
+    margin-top: -50px;
   }
 }
