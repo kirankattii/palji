@@ -257,7 +257,7 @@ const CouponFunctions = () => {
                   type="text"
                   placeholder="Enter coupon code"
                   value={couponCode}
-                  onChange={(e) => setCouponCode(e.target.value)}
+                  onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
                   disabled={loading}
                   className={styles.input}
                 />

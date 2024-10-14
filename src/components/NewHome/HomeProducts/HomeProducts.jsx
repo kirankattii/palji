@@ -139,7 +139,7 @@ const HomeProducts = () => {
       ) : (
         <div className={styles.container}>
           {products.length > 0 && (
-            <div className={styles.swiperContainer}>
+            <div >
               <Swiper
                 modules={[Navigation]}
                 spaceBetween={20}
