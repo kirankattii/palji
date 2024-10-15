@@ -16,6 +16,28 @@ let cartCountListeners = []
 // 		console.log(error)
 // 	}
 // }
+
+
+export const ApplyCoupan = async (couponCode) => {
+	try {
+		const response = await makeApi("/api/apply-coupon", "POST", {
+			coupon: couponCode,
+		});
+		fetchCart();
+	} catch (error) {
+		console.log(error);
+	}
+};
+export const RemoveCoupan = async (couponCode) => {
+	try {
+		await makeApi("/api/remove-coupon", "POST");
+
+		fetchCart();
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 export const fetchCart = async (setCartItems, setCompleteCart, setFetchCartLoader) => {
 	try {
 		setFetchCartLoader(true);
@@ -35,7 +57,7 @@ export const fetchCart = async (setCartItems, setCompleteCart, setFetchCartLoade
 		console.log(error);
 	} finally {
 		// fetchCart(setCartItems);
-		setFetchCartLoader(false);
+		// setFetchCartLoader(false);
 	}
 };
 
@@ -132,6 +154,8 @@ export const addToCart = async (
 			...prevState,
 			[productId]: false,
 		}));
+		RemoveCoupan()
+
 	}
 };
 
@@ -204,6 +228,8 @@ export const removeFromCart = async (
 			[productId]: false,
 		}));
 		fetchCart(setCartItems);
+		RemoveCoupan()
+
 	}
 };
 export const submitOrder = async (
@@ -365,6 +391,7 @@ export const deleteproductFromCart = async (
 			...prevState,
 			[productId]: false,
 		}));
+		RemoveCoupan()
 	}
 };
 
