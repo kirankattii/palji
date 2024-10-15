@@ -423,14 +423,19 @@ function Allproduct({ search, category, minPrice, maxPrice, categoryName }) {
 																/>
 															</div>
 														) : (
-															<button
-																className={`${styles.addToCartBtn} ${quantityLoading[item._id] ? styles.disabledBtn : ''}`}
-																onClick={() => handleIncreaseQuantity(item._id, item.size[0])}
-																disabled={quantityLoading[item._id]}
-															>
-																Add to Cart
-															</button>
+															<>
+																{quantityLoading[item._id] ?
+																	<div className={styles.loader} style={{ margin: "auto" }}>
+																	</div> :
+																	<button
 
+																		onClick={() => handleIncreaseQuantity(item._id, item.size[0])}
+
+																	>
+																		Add to Cart
+																	</button>
+																}
+															</>
 														)}
 													</div>
 												</div>

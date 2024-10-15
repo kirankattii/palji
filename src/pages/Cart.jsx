@@ -49,15 +49,6 @@ const Cart = () => {
 
   };
 
-  // // Handle deleting all quantities of a product
-  // const handleDeleteClick = (productId, selectProductSize, quantity) => {
-  //   console.log('cliksdfgh');
-  //   setProductToDelete({ productId, selectProductSize, quantity });
-  //   setShowConfirmDialog(true);
-
-
-  // };
-
   const handleDeleteClick = (productId, selectProductSize, quantity) => {
     console.log('Delete Clicked with productId:', productId);
     console.log('Size ID:', selectProductSize);
