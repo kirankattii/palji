@@ -120,9 +120,7 @@ function Checkout() {
 		if (!selectedShippingAddress) {
 			toast.error("Please select a shipping address")
 		}
-		// else if (!selectedBillingAddress) {
-		// 	toast.error("Please select a billing address")
-		// }
+
 		else {
 			setCurrentPage("PAYMENT")
 		}
@@ -311,57 +309,11 @@ function Checkout() {
 												))}
 										</div>
 									</div>
-									{/* <div>
-										<div className="shipping-address-title">
-											<h2>Billing Address</h2>
-											<button onClick={() => navigate("/add-billing-address")}>
-												Add New Address
-											</button>
-										</div>
-										<div className="shipping-address-list">
-											{loading && <Primaryloader />}
-											{!loading &&
-												billingAddresses.map((address, index) => (
-													<div
-														key={index}
-														className="address-item"
-													>
-														<input
-															type="radio"
-															id={`billing-address-${index}`}
-															name="billingAddress"
-															value={address._id}
-															checked={selectedBillingAddress === address}
-															onChange={() =>
-																handleBillingAddressSelect(address)
-															}
-															className="address-radio"
-														/>
-														<label
-															htmlFor={`billing-address-${index}`}
-															className="address-label"
-														>
-															{`${address.name} ${address.address}, ${address.city}, ${address.state}, ${address.country}`}
-														</label>
-													</div>
-												))}
-										</div>
-									</div> */}
+
 								</div>
 								{/* Proceed to Payment */}
 								<div className="styles_checkout_coupan">
-									{/* <div className="cart-promocode">
-										<h2>HAVE A COUPON ?</h2>
-										<div className="cart-promocode-input">
-											<input
-												type="text"
-												placeholder="COUPON CODE"
-												value={coupanCode}
-												onChange={(e) => setCoupanCode(e.target.value)}
-											/>
-											<button onClick={(e) => SubmitCoupan(e)}>APPLY</button>
-										</div>
-									</div> */}
+
 
 									<div onClick={(e) => manageCurrentPage(e)}>
 
@@ -456,6 +408,7 @@ function Checkout() {
 
 										ButtonName="PLACE ORDER"
 										disabled={isSubmitDisabled}
+										isCashOnDelivery={selectPaymentMethod === "Cash On Delivery"}
 									/>
 								</div>
 							</div>

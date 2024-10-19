@@ -154,7 +154,7 @@ export const addToCart = async (
 			...prevState,
 			[productId]: false,
 		}));
-		RemoveCoupan()
+		// RemoveCoupan()
 
 	}
 };
@@ -228,7 +228,7 @@ export const removeFromCart = async (
 			[productId]: false,
 		}));
 		fetchCart(setCartItems);
-		RemoveCoupan()
+		// RemoveCoupan()
 
 	}
 };
@@ -391,7 +391,7 @@ export const deleteproductFromCart = async (
 			...prevState,
 			[productId]: false,
 		}));
-		RemoveCoupan()
+		// RemoveCoupan()
 	}
 };
 
