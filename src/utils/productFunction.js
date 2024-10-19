@@ -57,7 +57,7 @@ export const fetchCart = async (setCartItems, setCompleteCart, setFetchCartLoade
 		console.log(error);
 	} finally {
 		// fetchCart(setCartItems);
-		// setFetchCartLoader(false);
+		setFetchCartLoader(false);
 	}
 };
 
