@@ -40,12 +40,12 @@ const NewFooter = () => {
         <div className={styles.addresses}>
           <h2>LOCATE US</h2>
           <div>
+            <address>4GV, Main Hambran Rd. Mayur Vihar,
+              Dev Nagar, Ludhiana, Punjab.</address>
             <address>1236, Kailash Cinema Rd. Kailash Chowk,
               Civil Lines, Ludhiana, Punjab.</address>
             <address>5A, Sat Paul Mittal Rd. A - Block,
               Sarabha Nagar, Ludhiana, Punjab.</address>
-            <address>4GV, Main Hambran Rd. Mayur Vihar,
-              Dev Nagar, Ludhiana, Punjab.</address>
           </div>
         </div>
       </div>
