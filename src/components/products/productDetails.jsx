@@ -362,6 +362,7 @@ import AddIcon from "../../assets/add_icon_green.png";
 import RemoveIcon from "../../assets/remove_icon_red.png";
 import "../../pages/CSS/product/productDetails.css";
 import { GoArrowLeft } from "react-icons/go";
+import { assets } from "../../assets/assets.js";
 
 function ProductDetails() {
   const navigate = useNavigate();
@@ -581,13 +582,44 @@ function ProductDetails() {
                       <h2>₹{selectedSize?.FinalPrice}</h2>
                     </div>
                     {selectedSize?.price > selectedSize?.FinalPrice && <span className={styles.mrpSpan}> M.R.P ₹{selectedSize?.price}</span>}
+                    <div className={styles.actions}>
+                      {isInCart ? (
+                        <div className={styles.cartIncDec}>
+                          <img
+                            src={RemoveIcon}
+                            alt=""
+                            onClick={handleDecreaseQuantity} />
+                          {quantityLoading ? (
+                            <div className={styles.countLoaderss}>
+                              {/* <PrimaryLoader /> */}
+                            </div>
+                          ) : (
+                            <p>{cartQuantity}</p>
+                          )}
+                          {/* <p>{cartQuantity}</p> */}
+                          <img src={AddIcon} alt="" onClick={handleIncreaseQuantity} />
+                          {/* <button className="btn btn-danger" onClick={() => navigate("/cart")}>Go to Cart</button> */}
+                        </div>
+                      ) : (
+                        fetchCartLoader ? (
+                          <PrimaryLoader />
+                        ) : (
+                          <>
+                            <div
+                              className={styles.addTocart}
+
+                              onClick={handleIncreaseQuantity}>Add to Cart</div>
+                            {/* <button className="btn btn-warning" onClick={handleBuyNow}>Buy Now</button> */}
+                          </>)
+                      )}
+                    </div>
                   </div>
 
-                  <div>
+                  <div className={styles.allAddToCart}>
                     {sizes.some(size => size.size && size.size.toLowerCase() !== 'null') && (
                       <div className={styles.sizeOptions}>
                         <h3>Select Size:</h3>
-                        <div className="d-flex gap-2 flex-wrap">
+                        <div className={styles.sizeButtons}>
                           {sizes.map(size => (
                             size.size && size.size.toLowerCase() !== 'null' && ( // Conditional check to exclude null and 'null'
                               <button
@@ -610,41 +642,15 @@ function ProductDetails() {
 
                 </div>
               </div>
-              <div className={styles.actions}>
-                {isInCart ? (
-                  <div className={styles.cartIncDec}>
-                    <img
-                      src={RemoveIcon}
-                      alt=""
-                      onClick={handleDecreaseQuantity} />
-                    {quantityLoading ? (
-                      <div className={styles.countLoaderss}>
-                        {/* <PrimaryLoader /> */}
-                      </div>
-                    ) : (
-                      <p>{cartQuantity}</p>
-                    )}
-                    {/* <p>{cartQuantity}</p> */}
-                    <img src={AddIcon} alt="" onClick={handleIncreaseQuantity} />
-                    {/* <button className="btn btn-danger" onClick={() => navigate("/cart")}>Go to Cart</button> */}
-                  </div>
-                ) : (
-                  fetchCartLoader ? (
-                    <PrimaryLoader />
-                  ) : (
-                    <>
-                      <div
-                        className={styles.addTocart}
 
-                        onClick={handleIncreaseQuantity}>Add to Cart</div>
-                      {/* <button className="btn btn-warning" onClick={handleBuyNow}>Buy Now</button> */}
-                    </>)
-                )}
-              </div>
             </div>
             <div className={styles.description}>
               <h2>Description</h2>
               <p>{product?.description}</p>
+            </div>
+            <div className={styles.vegetarian}>
+              <img src={assets.vegetarian} alt="" />
+              <p>This is a <strong>Vegetarian</strong> product.</p>
             </div>
             {includes && includes.length > 0 && (
               <div className={styles.includes}>
