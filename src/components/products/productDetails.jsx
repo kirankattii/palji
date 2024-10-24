@@ -752,7 +752,15 @@ function ProductDetails() {
     fetchCartItems();
   }, [productId]);
 
-  const fetchProduct = async () => {
+/*************  ✨ Codeium Command ⭐  *************/
+/**
+ * Fetches product details from the API.
+ * Sets the product, sizes, includes, and selected image in state.
+ * Sets the first available size as the selected size if available.
+ * Shows a loading indicator while fetching.
+ * @returns {Promise<void>}
+ */
+/******  975c448a-620f-4fe6-a47c-3bd2aace234f  *******/  const fetchProduct = async () => {
     try {
       setLoading(true);
       const response = await makeApi(`/api/get-single-product/${productId}`, "GET");
