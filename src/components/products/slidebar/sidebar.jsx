@@ -240,6 +240,7 @@ const ProductSidebar = () => {
 	const [categoryName, setCategoryName] = useState("");
 	const [selectedPriceRange, setSelectedPriceRange] = useState({ min: 0, max: 1000000 }); // No filter by default
 
+
 	const [showDropdown, setShowDropdown] = useState(false);
 
 	useEffect(() => {
@@ -444,7 +445,8 @@ const ProductSidebar = () => {
 			<FilterDropdown
 				show={showDropdown}
 				onClose={() => setShowDropdown(false)}
-				onApply={handleFilterApply} // Now passes both category and price range
+				onApply={handleFilterApply}
+				categories={categories}
 			/>
 		</>
 	);
