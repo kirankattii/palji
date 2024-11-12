@@ -1,29 +1,12 @@
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d6029b8bb10344a678ff5fef1c24bd49e728ecba
 // import React, { useEffect, useState } from "react";
 // import "../../../pages/CSS/product/sidebar.css";
 // import Allproduct from "../allproduct";
 // import styles from "../../../pages/CSS/product/sidebar.module.css";
-<<<<<<< HEAD
-// import { useNavigate } from "react-router-dom";
-=======
->>>>>>> d6029b8bb10344a678ff5fef1c24bd49e728ecba
 // import { makeApi } from "../../../api/callApi";
 // import { IoSearch } from "react-icons/io5";
 // import FilterDropdown from "./FilterPopup";
 // import { RiArrowDropDownLine } from "react-icons/ri";
-<<<<<<< HEAD
-
-// const ProductSidebar = () => {
-// 	const history = useNavigate();
-
-// 	const [categories, setCategories] = useState([]);
-// 	const [search, setSearch] = useState("");
-// 	const [selectedCategory, setSelectedCategory] = useState("");
-=======
 // import { useLocation } from "react-router-dom";
 
 
@@ -36,7 +19,6 @@
 // 	const [categories, setCategories] = useState([]);
 // 	const [search, setSearch] = useState("");
 // 	const [selectedCategory, setSelectedCategory] = useState();
->>>>>>> d6029b8bb10344a678ff5fef1c24bd49e728ecba
 // 	const [categoryName, setCategoryName] = useState("");
 // 	const [selectedPriceRange, setSelectedPriceRange] = useState({ min: 0, max: 1000000 }); // No filter by default
 
@@ -234,13 +216,6 @@
 
 
 
-<<<<<<< HEAD
-
-
-
-
-=======
->>>>>>> d6029b8bb10344a678ff5fef1c24bd49e728ecba
 import React, { useEffect, useState } from "react";
 import "../../../pages/CSS/product/sidebar.css";
 import Allproduct from "../allproduct";
@@ -253,16 +228,11 @@ import { useLocation } from "react-router-dom";
 
 
 const ProductSidebar = () => {
-<<<<<<< HEAD
-	const history = useNavigate();
-	const navigate = useNavigate()
-=======
 	const location = useLocation();
 	const queryParams = new URLSearchParams(location.search);
 	const Dstatus = queryParams.get("category") || " ";
 	const [parmstatus, setParmstatus] = useState();
 	const [selectedSubcategory, setSelectedSubcategory] = useState("");
->>>>>>> d6029b8bb10344a678ff5fef1c24bd49e728ecba
 
 	const [categories, setCategories] = useState([]);
 	const [search, setSearch] = useState("");
@@ -318,13 +288,9 @@ const ProductSidebar = () => {
 		console.log('Category name:', name);
 	};
 
-<<<<<<< HEAD
-
-=======
 	const handleSubcategoryChange = (subcategoryId) => {
 		setSelectedSubcategory(subcategoryId);
 	};
->>>>>>> d6029b8bb10344a678ff5fef1c24bd49e728ecba
 
 	const handleFilterApply = (categoryId, minPrice, maxPrice) => {
 		setSelectedCategory(categoryId);
@@ -373,26 +339,12 @@ const ProductSidebar = () => {
 						<div className={styles.categories}>
 							<div>
 								<p
-<<<<<<< HEAD
-									onClick={() => handleCategoryChange("", "All Categories")}
-=======
 									onClick={() => handleCategoryChange("", "")}
->>>>>>> d6029b8bb10344a678ff5fef1c24bd49e728ecba
 									className={selectedCategory === "" ? styles.active : ""}
 								>
 									All
 								</p>
 								{categories.map((category) => (
-<<<<<<< HEAD
-									<p
-										key={category._id}
-										onClick={() => handleCategoryChange(category._id, category.name)}
-										className={selectedCategory === category._id ? styles.activeCategory : ""}
-									>
-										{category.name}
-									</p>
-
-=======
 									<div key={category._id}>
 										<p
 											onClick={() => handleCategoryChange(category._id, category.name)}
@@ -414,7 +366,6 @@ const ProductSidebar = () => {
 											</div>
 										)}
 									</div>
->>>>>>> d6029b8bb10344a678ff5fef1c24bd49e728ecba
 								))}
 							</div>
 						</div>
@@ -516,7 +467,6 @@ const ProductSidebar = () => {
 };
 
 export default ProductSidebar;
-
 
 
 
