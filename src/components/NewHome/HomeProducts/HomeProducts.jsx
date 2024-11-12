@@ -129,7 +129,8 @@ const HomeProducts = () => {
   );
 
   return (
-    <>
+    <div>
+      <h1 className={styles.headingOurRange}>Our Range</h1>
       {AllProductLoader ? (
         <div className="a_All_Product_loader">
           <div className={styles.loader}>
@@ -186,7 +187,7 @@ const HomeProducts = () => {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

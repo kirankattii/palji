@@ -2146,11 +2146,11 @@ function ProductDetails() {
                 <div className={styles.priceDetails}>
                   <div className={styles.priceFlexCol}>
                     <div className={styles.dicountinprecentage}>
+                      <h2>₹{selectedSize?.FinalPrice}</h2>
                       {selectedSize?.price > selectedSize?.FinalPrice &&
-                        <span style={{ color: 'red', marginLeft: '5px' }}>
+                        <span style={{ color: 'red', marginLeft: '15px' }}>
                           -{calculateDiscountPercentage(selectedSize?.price, selectedSize?.FinalPrice)}%
                         </span>}
-                      <h2>₹{selectedSize?.FinalPrice}</h2>
                     </div>
                     {selectedSize?.price > selectedSize?.FinalPrice && <span className={styles.mrpSpan}> M.R.P ₹{selectedSize?.price}</span>}
                     <div className={styles.actions}>

@@ -159,6 +159,14 @@
   right: 0;
 }
 
+.headingOurRange {
+  font-size: 3.5rem;
+  color: #EE5564;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
 @media (max-width: 1000px) {
   .imgContainer img {
     max-width: 180px;
@@ -171,6 +179,14 @@
 }
 
 @media (max-width: 600px) {
+  .headingOurRange {
+    font-size: 2.5rem;
+    color: #EE5564;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
+
   .container {
     width: 96%;
     margin: 30px auto;

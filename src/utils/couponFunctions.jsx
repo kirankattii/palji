@@ -243,60 +243,78 @@ const CouponFunctions = () => {
 
     //   <ToastContainer />
     // </div>
-    <div>
-      <div className="cart-bottomm">
-        <div className="cart-address">
-          <div className="cart-shipping-address"></div>
-        </div>
-
-        <div className="cart-billing">
-          <div className={styles.couponSection}>
-            {!appliedCoupon && ( // Conditionally render input and button only if coupon is not applied
-              <div className={styles.inputGroup}>
-                <input
-                  type="text"
-                  placeholder="Enter coupon code"
-                  value={couponCode}
-                  onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
-                  disabled={loading}
-                  className={styles.input}
-                />
-                <button
-                  onClick={handleApplyCoupon}
-                  disabled={loading}
-                  className={styles.button}
-                >
-                  {loading ? "Applying..." : "Apply Coupon"}
-                </button>
-              </div>
-            )}
-            {appliedCoupon && (
-              <div className={styles.appliedCoupon}>
-                <span>Coupon applied: {couponCode}</span>
-                <button
-                  onClick={handleRemoveCoupon}
-                  disabled={loading}
-                  className={`${styles.button} ${styles.removeButton}`}
-                >
-                  {loading ? "Removing..." : "Remove"}
-                </button>
-              </div>
-            )}
+    <>
+      <ToastContainer position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        style={{
+          position: 'fixed',
+          top: '1rem',
+          right: '1rem',
+          zIndex: 999999
+        }} />
+      <div>
+        <div className="cart-bottomm">
+          <div className="cart-address">
+            <div className="cart-shipping-address"></div>
           </div>
-          <CartCalculation
-            tax={0}
-            shipping={0}
-            CoupanApplied={appliedCoupon ? completeCart?.couapnDiscount : 0}
-            Final={completeCart?.totalPrice}
-            total={completeCart?.totalPriceWithoutDiscount}
-            ButtonName="PROCEED TO CHECKOUT"
-            disabled={false}
-          />
-        </div>
-      </div>
 
-      <ToastContainer />
-    </div>
+          <div className="cart-billing">
+            <div className={styles.couponSection}>
+              {!appliedCoupon && ( // Conditionally render input and button only if coupon is not applied
+                <div className={styles.inputGroup}>
+                  <input
+                    type="text"
+                    placeholder="Enter coupon code"
+                    value={couponCode}
+                    onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                    disabled={loading}
+                    className={styles.input}
+                  />
+                  <button
+                    onClick={handleApplyCoupon}
+                    disabled={loading}
+                    className={styles.button}
+                  >
+                    {loading ? "Applying..." : "Apply Coupon"}
+                  </button>
+                </div>
+              )}
+              {appliedCoupon && (
+                <div className={styles.appliedCoupon}>
+                  <span>Coupon applied: {couponCode}</span>
+                  <button
+                    onClick={handleRemoveCoupon}
+                    disabled={loading}
+                    className={`${styles.button} ${styles.removeButton}`}
+                  >
+                    {loading ? "Removing..." : "Remove"}
+                  </button>
+                </div>
+              )}
+            </div>
+            <CartCalculation
+              tax={0}
+              shipping={0}
+              CoupanApplied={appliedCoupon ? completeCart?.couapnDiscount : 0}
+              Final={completeCart?.totalPrice}
+              total={completeCart?.totalPriceWithoutDiscount}
+              ButtonName="PROCEED TO CHECKOUT"
+              disabled={false}
+            />
+          </div>
+        </div>
+
+
+      </div>
+    </>
   );
 };
 
