@@ -703,7 +703,7 @@
 
 
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import LoginPopup from "../../components/LoginPopup/LoginPopup.jsx";
@@ -718,7 +718,7 @@ import "../../pages/CSS/product/productDetails.css";
 import { GoArrowLeft } from "react-icons/go";
 import { assets } from "../../assets/assets.js";
 import ReactImageMagnify from 'react-image-magnify';
-
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 
 
@@ -744,6 +744,8 @@ function ProductDetails() {
   const [productLoaders, setProductLoaders] = useState({});
   const [fetchCartLoader, setFetchCartLoader] = useState(false);
   // const navigate = useNavigate();
+  const [startIndex, setStartIndex] = useState(0);
+  const scrollContainerRef = useRef(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -752,7 +754,15 @@ function ProductDetails() {
     fetchCartItems();
   }, [productId]);
 
-  const fetchProduct = async () => {
+/*************  ✨ Codeium Command ⭐  *************/
+/**
+ * Fetches product details from the API.
+ * Sets the product, sizes, includes, and selected image in state.
+ * Sets the first available size as the selected size if available.
+ * Shows a loading indicator while fetching.
+ * @returns {Promise<void>}
+ */
+/******  975c448a-620f-4fe6-a47c-3bd2aace234f  *******/  const fetchProduct = async () => {
     try {
       setLoading(true);
       const response = await makeApi(`/api/get-single-product/${productId}`, "GET");
@@ -885,6 +895,19 @@ function ProductDetails() {
   }
 
 
+  const scrollLeft = () => {
+    if (startIndex > 0) {
+      setStartIndex(startIndex - 1);
+    }
+  };
+
+  const scrollRight = () => {
+    if (startIndex + 4 < product.image.length + 1) {
+      setStartIndex(startIndex + 1);
+    }
+  };
+
+
 
   console.log("productNuturitions", productNuturitions);
 
@@ -934,14 +957,14 @@ function ProductDetails() {
               </div>
 
               {/* Thumbnails */}
-              <div className={styles.subImg}>
+              {/* <div className={styles.subImg}>
                 <div
                   className={`${styles.subImg1} ${selectedImage === product.thumbnail ? styles.activeImage : ""}`}
                   onClick={() => handleImageClick(product.thumbnail)}
                 >
                   <img src={product.thumbnail} alt="Thumbnail" />
                 </div>
-                {product.image.slice(0, 3).map((imgUrl, index) => (
+                {product.image.map((imgUrl, index) => (
                   <div
                     key={index}
                     className={`${styles.subImg1} ${selectedImage === imgUrl ? styles.activeImage : ""}`}
@@ -951,7 +974,33 @@ function ProductDetails() {
                   </div>
                 ))}
 
+              </div> */}
+
+              <div className={styles.subImgContainer}>
+                {(product.image.length + 1) > 4 && (
+                  <button className={styles.scrollButton} onClick={scrollLeft} disabled={startIndex === 0}>
+                    <FaChevronLeft />
+                  </button>
+                )}
+                <div className={styles.subImg} ref={scrollContainerRef}>
+                  {[product.thumbnail, ...product.image].slice(startIndex, startIndex + 4).map((imgUrl, index) => (
+                    <div
+                      key={startIndex + index}
+                      className={`${styles.subImg1} ${selectedImage === imgUrl ? styles.activeImage : ""}`}
+                      onClick={() => handleImageClick(imgUrl)}
+                    >
+                      <img src={imgUrl} alt={`Product Image ${startIndex + index}`} />
+                    </div>
+                  ))}
+                </div>
+                {(product.image.length + 1) > 4 && (
+                  <button className={styles.scrollButton} onClick={scrollRight} disabled={startIndex + 4 >= product.image.length + 1}>
+                    <FaChevronRight />
+                  </button>
+                )}
               </div>
+
+
             </div>
           </div>
           <div className={styles.productContant}>

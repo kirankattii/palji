@@ -238,3 +238,13 @@
 /* Customize the handle (dot) when active */
 .rc-slider .rc-slider-handle:active,
 .rc-slider .rc-slider-handle:hover {}
+
+.filter-subcategories {
+  margin-left: 20px;
+}
+
+.filter-subcategory {
+  gap: 5px;
+  display: flex;
+  align-items: center;
+}

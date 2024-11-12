@@ -59,3 +59,13 @@
 .allproducts {
   width: 100%;
 }
+
+
+.subcategories {
+  margin-left: 20px;
+}
+
+.activeSubcategory {
+  font-weight: bold;
+  /* color: #your-accent-color; */
+}

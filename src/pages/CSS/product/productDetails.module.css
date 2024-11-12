@@ -1171,3 +1171,32 @@
     display: none;
   }
 }
+
+
+.subImgContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subImg {
+  display: flex;
+  gap: 5px;
+  /* overflow: hidden; */
+}
+
+.scrollButton {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--redPink);
+  padding: 0 10px;
+}
+
+.scrollButton:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Adjust other styles as needed */

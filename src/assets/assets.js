@@ -60,6 +60,7 @@ import cart_gif from './home/cart gif.gif'
 import razorpay_logo from './razorpay.svg'
 import vegetarian from './home/vegetarien.png'
 
+
 export const assets = {
 	userprofile_menu,
 	cup_cakes,

@@ -508,9 +508,13 @@ import {
 import { LazyLoadImage } from "react-lazy-load-image-component"
 import { toast } from "react-toastify"
 
+<<<<<<< HEAD
 function Allproduct({ search, category, minPrice, maxPrice, categoryName }) {
 
 
+=======
+function Allproduct({ search, category, minPrice, maxPrice, categoryName, subcategory }) {
+>>>>>>> d6029b8bb10344a678ff5fef1c24bd49e728ecba
 	const [products, setProducts] = useState([])
 	const [loading, setLoading] = useState(false)
 	const [wishlistItems, setWishlistItems] = useState([])
@@ -550,7 +554,12 @@ function Allproduct({ search, category, minPrice, maxPrice, categoryName }) {
 		try {
 			setAllProductLoader(true);
 			const response = await makeApi(
+<<<<<<< HEAD
 				`/api/get-all-products?name=${searchTerm}&category=${cat}&minPrice=${min}&maxPrice=${max}&page=${page}&perPage=${ResultPerPage}&IsOutOfStock=false`,
+=======
+				`/api/get-all-products?name=${search}&category=${category}&subcategory=${subcategory}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}&perPage=${ResultPerPage}&IsOutOfStock=false`,
+				// `get-all-products-for-admin`,
+>>>>>>> d6029b8bb10344a678ff5fef1c24bd49e728ecba
 				"GET"
 			);
 			console.log("Fetched products:", response.data.products);
@@ -592,7 +601,7 @@ function Allproduct({ search, category, minPrice, maxPrice, categoryName }) {
 		setCurrentPage(1) // Reset the current page to 1
 		fetchCart(setCartItems)
 		fetchCartItems()
-	}, [search, category, minPrice, maxPrice, ResultPerPage])
+	}, [search, category, subcategory, minPrice, maxPrice, ResultPerPage])
 
 	useEffect(() => {
 		fetchProduct() // Fetch products whenever the current page changes
