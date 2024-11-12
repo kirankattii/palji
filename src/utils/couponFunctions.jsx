@@ -245,7 +245,7 @@ const CouponFunctions = () => {
     // </div>
     <>
       <ToastContainer position="top-right"
-        autoClose={3000}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -256,9 +256,10 @@ const CouponFunctions = () => {
         theme="light"
         style={{
           position: 'fixed',
-          top: '1rem',
+          top: '5rem',
           right: '1rem',
-          zIndex: 999999
+          zIndex: 99999999999999
+
         }} />
       <div>
         <div className="cart-bottomm">

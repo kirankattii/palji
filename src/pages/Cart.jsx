@@ -159,7 +159,23 @@ const Cart = () => {
           </div>
 
           <div className="cartcalulaction-comp">
-            <CouponFunctions />
+            <CouponFunctions toastContainer={<ToastContainer position="top-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+              style={{
+                position: 'fixed',
+                top: '1rem',
+                right: '1rem',
+                zIndex: 99999999999999
+
+              }} />} />
           </div>
 
           {/* Confirmation Dialog for product deletion */}
