@@ -179,3 +179,19 @@
     transform: rotate(360deg);
   }
 }
+
+@media(max-width:500px) {
+  .title {
+    font-size: 1.6rem;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #A95800;
+  }
+
+  .container {
+    width: 85%;
+    margin: auto;
+    /* background: f1f0f5; */
+    margin-top: 50px;
+  }
+}

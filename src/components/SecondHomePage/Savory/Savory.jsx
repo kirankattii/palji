@@ -11,6 +11,7 @@ const Savory = () => {
   const navigate = useNavigate();
   const swiperRef = useRef(null);
 
+
   const fetchProduct = async () => {
     try {
       setAllProductLoader(true);
@@ -36,6 +37,10 @@ const Savory = () => {
     fetchProduct();
   }, []);
 
+  function handleNavigate(id) {
+    navigate(`product/product-details/${id}`)
+  }
+
 
   return (
     <div className={styles.container}>
@@ -46,7 +51,7 @@ const Savory = () => {
       </div>
       <div className={styles.content}>
         {products.map(item => (
-          <div>
+          <div onClick={() => handleNavigate(item._id)} style={{ cursor: "pointer" }}>
             <div className={styles.productContent}>
               <div className={styles.productImage}>
                 <img src={item.thumbnail} alt="" />
@@ -54,7 +59,6 @@ const Savory = () => {
             </div>
             <div className={styles.name}>
               <p>{item.name}</p>
-
             </div>
           </div>
         ))}
