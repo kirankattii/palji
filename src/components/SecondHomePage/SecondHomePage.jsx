@@ -10,7 +10,7 @@ import SweetPraise from './SweetPraise/SweetPraise'
 
 const SecondHomePage = () => {
   return (
-    <div style={{ background: "#f1f0f5", paddingBottom: "100px" }}>
+    <div style={{ background: "#f1f0f5", paddingBottom: "80px" }}>
       <Slider />
       <MarqueeComponent />
       <Cookies />

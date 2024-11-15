@@ -147,9 +147,13 @@ const Cookies = () => {
     const cartItem = cartItems.find(item => item.productId === productId && item.size === size._id);
     if (cartItem && cartItem.quantity > 0) {
       try {
+        setQuantityLoading(prev => ({ ...prev, [productId]: true }));
         await removeFromCart(productId, setProductLoaders, setCartItems, fetchCartItems, size._id);
       } catch (error) {
         console.error("Error decreasing quantity:", error);
+      }
+      finally {
+        setQuantityLoading(prev => ({ ...prev, [productId]: false }));
       }
     }
   };
