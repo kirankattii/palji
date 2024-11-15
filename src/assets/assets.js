@@ -59,6 +59,16 @@ import paljiMainImg from './paljiMainImg.png'
 import cart_gif from './home/cart gif.gif'
 import razorpay_logo from './razorpay.svg'
 import vegetarian from './home/vegetarien.png'
+import dotPoint from './dotpoint.svg'
+import cookiesDemoImage from './home/cookiesdemoImage.png'
+import category1 from './categoty1.png'
+import category2 from './categoty2.png'
+import category3 from './categoty3.png'
+import category4 from './categoty4.png'
+import brownArrow from './brownArrow.png'
+import blackArrow from './blackArrow.png'
+import homeGiftHamper from './paljiHomeHampers.png'
+import crossArrow from './cross Arrow.png'
 
 
 export const assets = {
@@ -121,5 +131,15 @@ export const assets = {
 	paljiMainImg,
 	cart_gif,
 	razorpay_logo,
-	vegetarian
+	vegetarian,
+	dotPoint,
+	cookiesDemoImage,
+	category1,
+	category2,
+	category3,
+	category4,
+	brownArrow,
+	blackArrow,
+	homeGiftHamper,
+	crossArrow
 }

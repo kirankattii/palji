@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Aboreto&display=swap');
 
 * {
   padding: 0;
@@ -35,7 +35,8 @@ a {
 
 :root {
   --gay-bg-color: rgb(130, 130, 123);
-  --redPink: #EE5564
+  --redPink: #EE5564;
+  --volite: #A95800
 }
 
 Link {
@@ -101,4 +102,26 @@ Link {
   font-style: normal;
   font-weight: normal;
   src: local('Eina03-Light'), url('../src/assets/home/Boomerfont.otf') format('woff');
+}
+
+
+@font-face {
+  font-family: 'Made light';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Eina03-Light'), url('../src/assets/fonts/MADELight.otf') format('woff');
+}
+
+@font-face {
+  font-family: 'Made medium';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Eina03-Light'), url('../src/assets/fonts/MADEMedium.otf') format('woff');
+}
+
+@font-face {
+  font-family: 'Made regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Eina03-Light'), url('../src/assets/fonts/MADERegular.otf') format('woff');
 }

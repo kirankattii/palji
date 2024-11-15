@@ -1,12 +1,15 @@
+
+
 // import React, { useEffect, useState } from "react"
 // import { makeApi } from "../../api/callApi"
-// import { Link, useNavigate } from "react-router-dom"
+// import { Link, useNavigate, useLocation } from "react-router-dom"
 // import { ToastContainer, toast } from "react-toastify"
 
 // import "./signup.css"
 
 // const Signup = () => {
 // 	const navigate = useNavigate()
+// 	const location = useLocation()
 // 	const mobileNumberRegex = /^[0-9]{10}$/
 // 	const [signupSuccess, setSignupSuccess] = useState(false)
 // 	const [loading, setLoading] = useState(false)
@@ -18,6 +21,13 @@
 // 		email: "",
 // 		mobileNumber: "",
 // 	})
+
+// 	useEffect(() => {
+// 		if (location.state?.state) {
+// 			setState(location.state.state)
+// 		}
+// 	}, [location.state])
+
 // 	const changeHandler = (e) => {
 // 		setFormData({ ...formData, [e.target.name]: e.target.value })
 // 	}
@@ -41,11 +51,10 @@
 // 			if (responseData.success) {
 // 				localStorage.setItem("token", responseData.token)
 // 				setSignupSuccess(true)
-// 				toast.success(responseData.message, {
-// 					onClose: () => {
-// 						navigate("/")
-// 					},
-// 				})
+// 				toast.success(responseData.message)
+// 				navigate("/")
+// 				window.location.reload();
+
 // 			} else {
 // 				console.log("Login failed:", responseData.error)
 // 				// Handle login failure
@@ -94,10 +103,12 @@
 // 				localStorage.setItem("token", responseData.token)
 // 				setSignupSuccess(true)
 // 				toast.success(responseData.message || "Sign up Successfully", {
+
 // 					onClose: () => {
 // 						navigate("/")
 // 					},
 // 				})
+
 // 			} else {
 // 				console.log("Signup failed:", responseData.error)
 // 				// Handle signup failure
@@ -115,7 +126,7 @@
 // 	}
 // 	return (
 // 		<>
-// 			<ToastContainer />
+// 			<ToastContainer autoClose={1500} />
 // 			<div className="signup">
 // 				<div className="signup-form">
 // 					<div className="enter-name">
@@ -168,14 +179,17 @@
 // 						value={formData.password}
 // 						onChange={changeHandler}
 // 					/>
-// 					<button
-// 						onClick={() => {
-// 							state === "Login" ? login() : signup()
-// 						}}
-// 						disabled={loading}
-// 					>
-// 						{loading ? "Loading..." : "Continue"}
-// 					</button>
+// 					{!loading &&
+// 						<button
+// 							onClick={() => {
+// 								state === "Login" ? login() : signup()
+// 							}}
+// 							disabled={loading} // Disable button if form is invalid or loading
+
+// 						>
+// 							{loading ? "Loading..." : "Continue"}
+// 						</button>
+// 					}
 // 					{state === "Login" ? (
 // 						<Link
 // 							to="/Forgot-Password"
@@ -216,10 +230,20 @@
 
 // export default Signup
 
+
+
+
+
+
+
+
 import React, { useEffect, useState } from "react"
 import { makeApi } from "../../api/callApi"
 import { Link, useNavigate, useLocation } from "react-router-dom"
 import { ToastContainer, toast } from "react-toastify"
+import { auth, provider } from "./config.js";
+import { signInWithPopup } from "firebase/auth";
+
 
 import "./signup.css"
 
@@ -255,11 +279,11 @@ const Signup = () => {
 			setLoading(false)
 			return
 		}
-		if (!formData.password) {
-			toast.error("Please fill password")
-			setLoading(false)
-			return
-		}
+		// if (!formData.password) {
+		// 	toast.error("Please fill password")
+		// 	setLoading(false)
+		// 	return
+		// }
 
 		try {
 			const response = await makeApi("/api/login-user", "post", formData)
@@ -295,14 +319,14 @@ const Signup = () => {
 			toast.error("Please fill password")
 			return
 		}
-		if (!mobileNumberRegex.test(formData.mobileNumber)) {
-			toast.error("Please enter a valid 10-digit mobile number")
-			return
-		}
-		if (!formData.mobileNumber) {
-			toast.error("Please fill mobileNumber")
-			return
-		}
+		// if (!mobileNumberRegex.test(formData.mobileNumber)) {
+		// 	toast.error("Please enter a valid 10-digit mobile number")
+		// 	return
+		// }
+		// if (!formData.mobileNumber) {
+		// 	toast.error("Please fill mobileNumber")
+		// 	return
+		// }
 		if (!formData.firstName) {
 			toast.error("Please fill firstName")
 			return
@@ -340,11 +364,119 @@ const Signup = () => {
 			toast.error(errorMessage)
 		}
 	}
+
+	// const handelClick = async () => {
+	// 	setLoading(true);
+	// 	try {
+	// 		const result = await signInWithPopup(auth, provider);
+	// 		const user = result.user;
+
+
+	// 		setFormData({
+	// 			...formData,
+	// 			email: user.email,
+	// 			firstName: user.displayName.split(' ')[0],
+	// 			lastName: user.displayName.split(' ')[1] || '',
+	// 		});
+
+
+	// 		let response;
+	// 		if (state === "Sign Up") {
+	// 			// Call register API if the state is "Sign Up"
+	// 			response = await makeApi("/api/register-user", "post", {
+	// 				email: user.email,
+	// 				firstName: user.displayName.split(' ')[0],
+	// 				lastName: user.displayName.split(' ')[1] || '',
+	// 			});
+	// 		} else {
+	// 			// Call login API if the state is "Login"
+	// 			response = await makeApi("/api/register-user", "post", {
+	// 				email: user.email,
+	// 				firstName: user.displayName.split(' ')[0],
+	// 				lastName: user.displayName.split(' ')[1] || '',
+	// 			});
+	// 		}
+
+	// 		const responseData = response.data;
+	// 		if (responseData.success) {
+	// 			localStorage.setItem("token", responseData.token);
+	// 			setSignupSuccess(true);
+	// 			toast.success(responseData.message || "Sign in successful", {
+	// 				onClose: () => {
+	// 					navigate("/");
+	// 				},
+	// 			});
+	// 		} else {
+	// 			console.log(`${state} failed:`, responseData.error);
+	// 		}
+
+	// 		navigate("/");
+	// 	} catch (error) {
+
+	// 		console.error("Error during Google Sign-in:", error);
+	// 		toast.error("Failed to sign in with Google");
+
+	// 	} finally {
+	// 		setLoading(false); // Set loading back to false after the process
+	// 	}
+	// };
+
+	const handelClick = async () => {
+		setLoading(true);
+		try {
+			// Sign in with Google and retrieve user info
+			const result = await signInWithPopup(auth, provider);
+			const user = result.user;
+
+			// Prepare data for registration
+			const registrationData = {
+				email: user.email,
+				firstName: user.displayName.split(' ')[0],
+				lastName: user.displayName.split(' ')[1] || '',
+			};
+
+			// Attempt to register the user
+			const response = await makeApi("/api/register-user", "post", registrationData);
+
+			// Handle response
+			const responseData = response.data;
+			if (responseData.success) {
+				localStorage.setItem("token", responseData.token);
+				setSignupSuccess(true);
+				toast.success(responseData.message || "Account created successfully!", {
+					onClose: () => {
+						navigate("/");
+					},
+				});
+			} else {
+				console.error("Registration failed:", responseData.error);
+				toast.error("Failed to create account. Please try again.");
+			}
+		} catch (error) {
+			console.error("Error during Google Sign-in:", error);
+			toast.error(`Failed to sign in with Google: ${error.message || error.code}`);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+
 	return (
 		<>
 			<ToastContainer autoClose={1500} />
 			<div className="signup">
 				<div className="signup-form">
+					<div
+						onClick={handelClick}
+						className="googleAUthorize"
+					>
+						<span  >
+							<img
+								src="https://static-00.iconduck.com/assets.00/google-icon-512x512-tqc9el3r.png" />
+							<p> {state === "Sign Up" ? "Sign Up with Google" : "Sign In with Google"}</p>
+						</span>
+					</div>
+					<div className="or">OR</div>
 					<div className="enter-name">
 						{state === "Sign Up" ? (
 							<input

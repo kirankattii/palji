@@ -1,0 +1,52 @@
+.container {
+  width: 85%;
+  margin: auto;
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  color: var(--volite);
+
+}
+
+.header img {
+  width: 30px;
+  margin-bottom: 7px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+}
+
+.innerContent {
+  padding: 40px;
+  margin: auto;
+}
+
+.innerContent .categoryImg {
+  width: 100%;
+  margin: auto;
+  /* background: #000; */
+}
+
+.cardContainer .name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.cardContainer .name p {
+  font-size: 1.3rem;
+}
+
+.cardContainer .name img {
+  margin-top: -12px;
+}

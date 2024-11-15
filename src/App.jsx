@@ -41,6 +41,8 @@ import PrivacyPolicy from "./PrivacyPolicy/PrivacyPolicy.jsx"
 import ShippingProcess from "./components/ShippingProcess/ShippingProcess.jsx"
 import LatestOrder from "./components/LatestOrder/LastestOrder.jsx"
 import ProductSidebar from "./components/products/slidebar/sidebar.jsx"
+import SecondHomePage from "./components/SecondHomePage/SecondHomePage.jsx"
+import SecondFooter from "./components/SecondFooter/SecondFooter.jsx"
 
 function App() {
 	// const [categories, setCategories] = useState([])
@@ -64,7 +66,7 @@ function App() {
 			<Routes>
 				<Route
 					path="/"
-					element={<NewHome />}
+					element={<SecondHomePage />}
 				/>
 				<Route
 					path="/aboutus"
@@ -217,7 +219,8 @@ function App() {
 					element={<AddressForm isBilling={false} />}
 				/>
 			</Routes>
-			<NewFooter />
+			{/* <NewFooter /> */}
+			<SecondFooter />
 		</div>
 	)
 }
