@@ -70,6 +70,7 @@ import {
   fetchWishlist,
 } from "../../../utils/productFunction.js"
 import Primaryloader from '../../loaders/primaryloader';
+import LoginPopup from '../../LoginPopup/LoginPopup.jsx';
 
 const Cookies = () => {
   // const [allProductLoader, setAllProductLoader] = useState(false);
