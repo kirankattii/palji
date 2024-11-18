@@ -466,7 +466,7 @@ const Signup = () => {
 			<ToastContainer autoClose={1500} />
 			<div className="signup">
 				<div className="signup-form">
-					<div
+					{/* <div
 						onClick={handelClick}
 						className="googleAUthorize"
 					>
@@ -476,7 +476,7 @@ const Signup = () => {
 							<p> {state === "Sign Up" ? "Sign Up with Google" : "Sign In with Google"}</p>
 						</span>
 					</div>
-					<div className="or">OR</div>
+					<div className="or">OR</div> */}
 					<div className="enter-name">
 						{state === "Sign Up" ? (
 							<input
