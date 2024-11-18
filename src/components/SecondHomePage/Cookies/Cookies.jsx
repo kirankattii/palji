@@ -206,7 +206,7 @@ const Cookies = () => {
                 <div className={styles.price}>
                   {item.size.length > 0 &&
                     <p className={styles.productPrice}>
-                      ₹{item.size[0].FinalPrice} {/* Assuming you want to show the price of the first size */}
+                      <span>₹</span>{item.size[0].FinalPrice} {/* Assuming you want to show the price of the first size */}
                       {item.size[0].discountPercentage > 0 && (
                         <span> ₹{item.size[0].price}</span>
                       )}

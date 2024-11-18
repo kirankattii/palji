@@ -138,6 +138,12 @@
   text-align: left;
 }
 
+.productPrice span {
+  font-size: 1rem;
+  margin-top: 7px;
+  margin-right: 2px;
+}
+
 .pricecart {
   display: flex;
   justify-content: space-between;

@@ -544,12 +544,32 @@ function Allproduct({ search, category, minPrice, maxPrice, categoryName, subcat
 		fetchProduct(1, categoryFromUrl, searchFromUrl, minPriceFromUrl, maxPriceFromUrl);
 	}, [location.search]);
 
+	// const fetchProduct = async (page, cat, searchTerm, min, max) => {
+	// 	try {
+	// 		setAllProductLoader(true);
+	// 		const response = await makeApi(
+	// 			`/api/get-all-products?name=${search}&category=${category}&subcategory=${subcategory}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}&perPage=${ResultPerPage}&IsOutOfStock=false`,
+	// 			// `get-all-products-for-admin`,
+	// 			"GET"
+	// 		);
+	// 		console.log("Fetched products:", response.data.products);
+	// 		setProducts(response.data.products);
+	// 		setToalProduct(response.data.totalProducts);
+	// 		const totalPages = Math.ceil(response.data.totalProducts / ResultPerPage);
+	// 		setTotalPages(totalPages);
+	// 	} catch (error) {
+	// 		console.error("Error fetching products:", error);
+	// 	} finally {
+	// 		setAllProductLoader(false);
+	// 	}
+	// };
+
+
 	const fetchProduct = async (page, cat, searchTerm, min, max) => {
 		try {
 			setAllProductLoader(true);
 			const response = await makeApi(
-				`/api/get-all-products?name=${search}&category=${category}&subcategory=${subcategory}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page}&perPage=${ResultPerPage}&IsOutOfStock=false`,
-				// `get-all-products-for-admin`,
+				`/api/get-all-products?name=${searchTerm}&category=${cat}&subcategory=${subcategory}&minPrice=${min}&maxPrice=${max}&page=${page}&perPage=${ResultPerPage}&IsOutOfStock=false`,
 				"GET"
 			);
 			console.log("Fetched products:", response.data.products);
@@ -563,6 +583,20 @@ function Allproduct({ search, category, minPrice, maxPrice, categoryName, subcat
 			setAllProductLoader(false);
 		}
 	};
+
+
+
+	// useEffect(() => {
+	// 	const queryParams = new URLSearchParams(location.search);
+	// 	const categoryFromUrl = queryParams.get("category") || "";
+	// 	const searchFromUrl = queryParams.get("search") || "";
+	// 	const minPriceFromUrl = queryParams.get("minPrice") || "0";
+	// 	const maxPriceFromUrl = queryParams.get("maxPrice") || "1000000";
+
+	// 	setCurrentPage(1);
+	// 	fetchProduct(1, categoryFromUrl, searchFromUrl, minPriceFromUrl, maxPriceFromUrl);
+	// }, [location.search]);
+
 	useEffect(() => {
 		const queryParams = new URLSearchParams(location.search);
 		const categoryFromUrl = queryParams.get("category") || "";
@@ -573,6 +607,7 @@ function Allproduct({ search, category, minPrice, maxPrice, categoryName, subcat
 		setCurrentPage(1);
 		fetchProduct(1, categoryFromUrl, searchFromUrl, minPriceFromUrl, maxPriceFromUrl);
 	}, [location.search]);
+
 
 
 	useEffect(() => {

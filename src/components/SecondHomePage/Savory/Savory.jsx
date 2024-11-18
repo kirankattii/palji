@@ -41,16 +41,20 @@ const Savory = () => {
     navigate(`product/product-details/${id}`)
   }
 
+  const handleCategoryClick = () => {
+    navigate(`/product/all-products?category=65f3c6ee7fd052885f56d587`);
+  };
+
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2>SOVORY</h2>
-        <h2>VIEW ALL <img src={assets.brownArrow} alt="" />
+        <h2>SAVORY</h2>
+        <h2 style={{ cursor: "pointer" }} onClick={handleCategoryClick}>VIEW ALL <img src={assets.brownArrow} alt="" />
         </h2>
       </div>
       <div className={styles.content}>
-        {products.map(item => (
+        {products.slice(0, 4).map(item => (
           <div onClick={() => handleNavigate(item._id)} style={{ cursor: "pointer" }}>
             <div className={styles.productContent}>
               <div className={styles.productImage}>

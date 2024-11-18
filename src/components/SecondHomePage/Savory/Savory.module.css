@@ -21,10 +21,11 @@
 
 .content {
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 60px;
-  overflow-x: auto;
-  overflow-y: hidden;
+  /* overflow-x: auto; */
+  /* overflow-y: hidden; */
 }
 
 .productContent {
@@ -81,11 +82,15 @@
   }
 
   .content {
-    width: 100%;
+    /* width: 100%;
     display: flex;
     gap: 20px;
     overflow-x: auto;
-    overflow-y: hidden;
+    overflow-y: hidden; */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    place-items: center;
   }
 
   .productContent img {
