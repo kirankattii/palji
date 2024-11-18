@@ -169,6 +169,8 @@ const Navbar = () => {
 
 
 
+
+
 	return showNavbar ? (
 		<div className="navbar">
 			<div className="left-navbar">

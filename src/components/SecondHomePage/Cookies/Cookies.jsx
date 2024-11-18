@@ -1,57 +1,3 @@
-// import React, { useEffect, useRef, useState } from 'react'
-// import { useNavigate } from 'react-router';
-// import { makeApi } from '../../../api/callApi';
-
-// const Cookies = () => {
-//   const [AllProductLoader, setAllProductLoader] = useState(false);
-//   const [products, setProducts] = useState([]);
-//   const navigate = useNavigate();
-
-
-//   const fetchProduct = async () => {
-//     try {
-//       setAllProductLoader(true);
-//       const categoriesResponse = await makeApi(`/api/get-all-categories`, "GET");
-//       const categories = categoriesResponse.data.categories;
-
-//       if (categories.length > 0) {
-//         const categoryId = categories[1]._id;
-//         const response = await makeApi(
-//           `/api/get-all-products-by-category/${categoryId}`,
-//           "GET"
-//         );
-//         setProducts(response.data.products);
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     } finally {
-//       setAllProductLoader(false);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchProduct();
-//   }, []);
-//   return (
-//     <div>
-//       <h1>PREMIUM COOKIES</h1>
-//       <div>
-//         {products.slice(0, 3).map((product) => (
-//           <div key={product._id}>
-//             <h2>{product.name}</h2>
-//             <p>{product.description}</p>
-//             <p>{product.price}</p>
-//             <button onClick={() => navigate(`/product/${product._id}`)}>Buy Now</button>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default Cookies
-
-
 
 
 import React, { useEffect, useState } from 'react';
@@ -114,6 +60,12 @@ const Cookies = () => {
   useEffect(() => {
     fetchProduct();
   }, []);
+
+  useEffect(() => {
+    fetchCart(setCartItems)
+    fetchCartItems()
+  }, [])
+
 
 
   const fetchCartItems = async () => {

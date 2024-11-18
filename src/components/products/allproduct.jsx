@@ -680,6 +680,9 @@ function Allproduct({ search, category, minPrice, maxPrice, categoryName, subcat
 	}, [category]);
 
 
+	const closePopup = () => {
+		setShowPopup(false);
+	};
 
 	return (
 		<div className={styles.mainContainer}>
