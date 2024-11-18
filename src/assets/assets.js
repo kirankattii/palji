@@ -69,6 +69,7 @@ import brownArrow from './brownArrow.png'
 import blackArrow from './blackArrow.png'
 import homeGiftHamper from './paljiHomeHampers.png'
 import crossArrow from './cross Arrow.png'
+import cookieVideo from './cookiesvideo.mp4'
 
 
 export const assets = {
@@ -141,5 +142,6 @@ export const assets = {
 	brownArrow,
 	blackArrow,
 	homeGiftHamper,
-	crossArrow
+	crossArrow,
+	cookieVideo
 }

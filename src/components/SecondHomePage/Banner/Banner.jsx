@@ -6,7 +6,9 @@ const Banner = () => {
     <div className={styles.conatiner}>
       <div className={styles.innerContainer}>
         <div className={styles.image}>
-          <img src={assets.cookiesDemoImage} alt="" />
+          <video autoPlay muted loop >
+            <source src={assets.cookieVideo} type="video/mp4" />
+          </video>
         </div>
         <div className={styles.content}>
           <h2>ABOUT palji bakery</h2>

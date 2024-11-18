@@ -15,7 +15,7 @@
   width: 80%;
 }
 
-.innerContainer .image img {
+.innerContainer .image video {
   width: 400px;
 }
 
@@ -45,7 +45,7 @@
 
 @media(max-width:750px) {
 
-  .innerContainer .image img {
+  .innerContainer .image video {
     width: 300px;
   }
 
@@ -71,7 +71,7 @@
   }
 
 
-  .innerContainer .image img {
+  .innerContainer .image video {
     width: 100%;
     margin: auto;
     height: 50vh;
