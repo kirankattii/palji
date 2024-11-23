@@ -2069,7 +2069,7 @@ function ProductDetails() {
                     {...{
                       smallImage: {
                         alt: 'Selected Product Image',
-                        width: 450,
+                        width: 500,
                         height: 450,
                         src: selectedImage,
                         className: "smallZoom"
@@ -2083,7 +2083,11 @@ function ProductDetails() {
                           backgroundColor: "#000"
                         }
                       },
-                      enlargedImagePosition: 'beside',
+                      // enlargedImagePosition: 'beside',
+                      enlargedImageContainerDimensions: {
+                        width: "180%",
+                        height: "130%",
+                      },
                       // isHintEnabled: true,
                       shouldHideHintAfterFirstActivation: false
                     }}
