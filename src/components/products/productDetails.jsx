@@ -2076,8 +2076,8 @@ function ProductDetails() {
                       },
                       largeImage: {
                         src: selectedImage,
-                        width: 1800,
-                        height: 1800,
+                        width: 2500,
+                        height: 2500,
                         className: "largeZoom",
                         style: {
                           backgroundColor: "#000"
@@ -2152,7 +2152,10 @@ function ProductDetails() {
                           -{calculateDiscountPercentage(selectedSize?.price, selectedSize?.FinalPrice)}%
                         </span>}
                     </div>
+
                     {selectedSize?.price > selectedSize?.FinalPrice && <span className={styles.mrpSpan}> M.R.P ₹{selectedSize?.price}</span>}
+                    <span className={styles.inclusiveOffAllTax}>Inclusive of all taxes</span>
+
                     <div className={styles.actions}>
                       {isInCart ? (
                         <div className={styles.cartIncDec}>

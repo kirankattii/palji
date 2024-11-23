@@ -1122,6 +1122,11 @@
   background-color: #fff0f0;
 }
 
+.inclusiveOffAllTax {
+  font-size: 17px;
+  margin-left: 10px;
+}
+
 @media(max-width:395px) {
   .sizeOptions {
     display: flex;
