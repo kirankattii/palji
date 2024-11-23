@@ -93,38 +93,66 @@ function Checkout() {
 		setSelectPaymentMethod(payment)
 	}
 
+
+
+
 	const handleSubmit = async (event) => {
+		event.preventDefault();
+
 		if (!selectPaymentMethod) {
-			toast("Please select a payment method")
-			return
+			toast("Please select a payment method");
+			return;
 		}
-		event.preventDefault()
+
+		if (!selectedShippingAddress) {
+			toast.error("Please select a shipping address");
+			return;
+		}
+
+		if (!isPincodeValid(selectedShippingAddress, cartItem?.orderItems)) {
+			toast.error("The selected shipping address's pincode is not serviceable.");
+			return;
+		}
+
+		setIsSubmitDisabled(true);
+		const data = {
+			shippingAddress: selectedShippingAddress,
+			billingAddress: selectedBillingAddress,
+			paymentMethod: selectPaymentMethod,
+			CartId: cartItem._id,
+		};
+
 		if (selectPaymentMethod === "Razorpay") {
-			console.log(cartItem);
 			createRazorpayOrder(cartItem.totalPrice);
-
 		} else {
-			setIsSubmitDisabled(true)
-			const data = {
-				shippingAddress: selectedShippingAddress,
-				billingAddress: selectedBillingAddress,
-				paymentMethod: selectPaymentMethod,
-				CartId: cartItem._id,
-			}
-			await submitOrder(data, setLoading, setOrderPlaced, navigate)
+			await submitOrder(data, setLoading, setOrderPlaced, navigate);
 		}
-	}
+	};
 
-	// const manageCurrentPage = (e) => {
-	// 	e.preventDefault()
-	// 	if (!selectedShippingAddress) {
-	// 		toast.error("Please select a shipping address")
-	// 	}
 
-	// 	else {
-	// 		setCurrentPage("PAYMENT")
-	// 	}
-	// }
+
+
+
+
+	const isPincodeValid = (selectedAddress, cartItems) => {
+		// Ensure selectedAddress and cartItems exist
+		if (!selectedAddress || !cartItems || cartItems.length === 0) return true; // Allow if no address or cart items
+
+		const selectedPincode = selectedAddress.pincode?.toString(); // Convert to string for comparison
+		const availablePincodes = cartItems.flatMap((item) =>
+			item.productId?.category?.availablePinCodes?.map(String) || [] // Convert all to string
+		);
+
+		// If no pincodes in any cart item, allow proceeding to payment
+		if (availablePincodes.length === 0) return true;
+
+		// Check if selected pincode exists in available pincodes
+		const isValid = availablePincodes.includes(selectedPincode);
+		console.log("Selected Pincode:", selectedPincode); // Debugging
+		console.log("Available Pincodes:", availablePincodes); // Debugging
+		return isValid;
+	};
+
 
 
 	const manageCurrentPage = (e) => {
@@ -135,30 +163,11 @@ function Checkout() {
 			return;
 		}
 
-		// Get the selected address pincode
-		const selectedPincode = selectedShippingAddress.pincode;
-
-		// Check each product in cart for pincode restrictions
-		const productsWithPincodeRestrictions = cartItem.orderItems.filter(item =>
-			item.productId.category.availablePinCodes &&
-			item.productId.category.availablePinCodes.length > 0
-		);
-
-		// If there are products with pincode restrictions
-		if (productsWithPincodeRestrictions.length > 0) {
-			const invalidDeliveryProducts = productsWithPincodeRestrictions.filter(item =>
-				!item.productId.category.availablePinCodes.includes(selectedPincode)
-			);
-
-			if (invalidDeliveryProducts.length > 0) {
-				// Create message with product names that can't be delivered
-				const productNames = invalidDeliveryProducts.map(item => item.productId.name).join(", ");
-				toast.error(`Sorry, ${productNames} cannot be delivered to pincode ${selectedPincode}`);
-				return;
-			}
+		if (!isPincodeValid(selectedShippingAddress, cartItem?.orderItems)) {
+			toast.error("The selected shipping address's pincode is not serviceable.");
+			return;
 		}
 
-		// If all checks pass, proceed to payment
 		setCurrentPage("PAYMENT");
 	};
 
