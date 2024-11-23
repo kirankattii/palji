@@ -115,16 +115,53 @@ function Checkout() {
 		}
 	}
 
+	// const manageCurrentPage = (e) => {
+	// 	e.preventDefault()
+	// 	if (!selectedShippingAddress) {
+	// 		toast.error("Please select a shipping address")
+	// 	}
+
+	// 	else {
+	// 		setCurrentPage("PAYMENT")
+	// 	}
+	// }
+
+
 	const manageCurrentPage = (e) => {
-		e.preventDefault()
+		e.preventDefault();
+
 		if (!selectedShippingAddress) {
-			toast.error("Please select a shipping address")
+			toast.error("Please select a shipping address");
+			return;
 		}
 
-		else {
-			setCurrentPage("PAYMENT")
+		// Get the selected address pincode
+		const selectedPincode = selectedShippingAddress.pincode;
+
+		// Check each product in cart for pincode restrictions
+		const productsWithPincodeRestrictions = cartItem.orderItems.filter(item =>
+			item.productId.category.availablePinCodes &&
+			item.productId.category.availablePinCodes.length > 0
+		);
+
+		// If there are products with pincode restrictions
+		if (productsWithPincodeRestrictions.length > 0) {
+			const invalidDeliveryProducts = productsWithPincodeRestrictions.filter(item =>
+				!item.productId.category.availablePinCodes.includes(selectedPincode)
+			);
+
+			if (invalidDeliveryProducts.length > 0) {
+				// Create message with product names that can't be delivered
+				const productNames = invalidDeliveryProducts.map(item => item.productId.name).join(", ");
+				toast.error(`Sorry, ${productNames} cannot be delivered to pincode ${selectedPincode}`);
+				return;
+			}
 		}
-	}
+
+		// If all checks pass, proceed to payment
+		setCurrentPage("PAYMENT");
+	};
+
 
 	// Calculate final price after applying coupon discount
 	const calculateFinalPrice = () => {
@@ -303,7 +340,7 @@ function Checkout() {
 															htmlFor={`shipping-address-${index}`}
 															className="address-label"
 														>
-															{`${address.firstname} ${address.lastname}, ${address.address}, ${address.city}, ${address.state}, ${address.country}`}
+															{`${address.firstname} ${address.lastname}, ${address.address}, ${address.city}, ${address.state}, ${address.country}, ${address.pincode}`}
 														</label>
 													</div>
 												))}
