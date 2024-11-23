@@ -658,8 +658,14 @@ const ProductSidebar = () => {
 					</div>
 				</div>
 
+
+
+				<hr className={styles.sidebar_hr}
+				/>
+
 				{/* All Product List */}
 				<div className={styles.allproducts} style={{ zIndex: 1 }}>
+					<div></div>
 					<Allproduct
 						search={search}
 						category={selectedCategory}

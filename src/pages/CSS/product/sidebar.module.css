@@ -69,3 +69,7 @@
   font-weight: bold;
   /* color: #your-accent-color; */
 }
+
+.sidebar_hr {
+  border: 1px solid #b5651d;
+}
